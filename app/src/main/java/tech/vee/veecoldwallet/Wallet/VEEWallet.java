@@ -27,8 +27,8 @@ public class VEEWallet {
 
     private static final String TAG = "Winston";
     private static final String WALLET_VERSION = "1.0";
-    private static final String AGENT_VERSION = "0.2.0";
-    private static final String AGENT_NAME = "VEE Cold Wallet Android";
+    private static final String AGENT_VERSION = "0.0.1";
+    private static final String AGENT_NAME = "V Cold Wallet Android";
 
     public static final String[] SEED_WORDS = {
             "abandon", "ability", "able", "about", "above", "absent", "absorb", "abstract", "absurd", "abuse", "access",
@@ -222,7 +222,7 @@ public class VEEWallet {
         accountSeeds = new ArrayList<>();
         nonce = 0;
         chainId = VEEChain.MAIN_NET;
-        agent = "VEE wallet:" + WALLET_VERSION + "/" + AGENT_NAME + ":" + AGENT_VERSION;
+        agent = "V Wallet Specification:" + WALLET_VERSION + "/" + AGENT_NAME + ":" + AGENT_VERSION;
     }
 
     public VEEWallet(byte chainId, String seed, List<String> accountSeeds, long nonce){
@@ -239,7 +239,7 @@ public class VEEWallet {
             case VEEChain.TEST_NET:
                 chain = "testnet";
         }
-        agent = "VEE Wallet:" + WALLET_VERSION + "/" + AGENT_NAME + ":" + AGENT_VERSION + "/" + chain;
+        agent = "V Wallet Specification:" + WALLET_VERSION + "/" + AGENT_NAME + ":" + AGENT_VERSION + "/" + chain;
         Log.d(TAG, agent);
     }
     public VEEWallet(byte chainId, String json){
