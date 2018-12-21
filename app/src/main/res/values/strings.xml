@@ -35,7 +35,7 @@
     <string name="settings_connectivity_summary">Check for wifi, data, and bluetooth</string>
 
     <string name="settings_about_us">About Us</string>
-    <string name="settings_about_us_summary">Learn more about VEE</string>
+    <string name="settings_about_us_summary">Learn more about VSYS</string>
 
     <!-- Strings related to Scanner -->
     <string name="scanner_tip">Align QR code within frame to scan</string>
@@ -46,11 +46,11 @@
     <string name="sign_tx">Sign Transaction</string>
 
     <!-- Strings related to About us -->
-    <string name="copyright">Copyright (c) 2018 VEE Technology LLC</string>
-    <string name="version_main">VEE Cold Wallet version 0.2.0</string>
-    <string name="version_test">VEE Cold Wallet version 0.2.0(for Testnet)</string>
-    <string name="description">VEE Cold Wallet is a reference implementation of high security cold
-        storage for the VEE blockchain network. It implements VEE wallet format specification 1.0. </string>
+    <string name="copyright">Copyright (c) 2018 Virtual Economy Technology Limited</string>
+    <string name="version_main">V Cold Wallet version 0.0.1</string>
+    <string name="version_test">V Cold Wallet version 0.0.1(for Testnet)</string>
+    <string name="description">V Cold Wallet is a reference implementation of high security cold
+        storage for the V blockchain network. It implements V wallet format specification 1.0. </string>
 
     <!-- Strings related to Import Seed -->
     <string name="import_seed_title_1">Method 1</string>
@@ -119,7 +119,7 @@
     <string name="sign_transaction">Sign Transaction</string>
     <string name="backup_wallet">Backup Wallet</string>
     <string name="append_accounts">Add Accounts</string>
-    <string name="message">Welcome to VEE Cold Wallet! Press button below to start.</string>
+    <string name="message">Welcome to VSYS Cold Wallet! Press button below to start.</string>
 
     <!-- Strings related to Set Password -->
     <string name="set_password_title">Password</string>
