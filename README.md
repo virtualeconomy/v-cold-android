@@ -2,9 +2,9 @@
 [![License](http://img.shields.io/badge/License-Apache%202.0-brightgreen.svg?style=flat)](https://opensource.org/licenses/Apache-2.0)
 # VSYS Android Client: Cold Wallet 
 ## Current release:
-- 0.0.1
+- 0.1.0
 
-## Release notes for 0.0.1: 
+## Release notes for 0.1.0: 
 - Misc bug fixes related to UI
 - Compatibility fixes for more screen sizes
 - Fix support for Android 6.0
@@ -33,4 +33,4 @@
 ## Download Link:	
 Scan below using mobile device	
 
- ![Download Link](https://github.com/virtualeconomy/vsys-cold-android/raw/master/vsys-cold-android-0.0.1.png)
+ ![Download Link](https://github.com/virtualeconomy/vsys-cold-android/raw/master/vsys-cold-android-0.1.0.png)

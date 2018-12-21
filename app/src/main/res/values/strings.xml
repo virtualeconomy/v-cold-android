@@ -47,8 +47,8 @@
 
     <!-- Strings related to About us -->
     <string name="copyright">Copyright (c) 2018 Virtual Economy Technology Limited</string>
-    <string name="version_main">V Cold Wallet version 0.0.1</string>
-    <string name="version_test">V Cold Wallet version 0.0.1(for Testnet)</string>
+    <string name="version_main">V Cold Wallet version 0.1.0</string>
+    <string name="version_test">V Cold Wallet version 0.1.0(for Testnet)</string>
     <string name="description">V Cold Wallet is a reference implementation of high security cold
         storage for the V blockchain network. It implements V wallet format specification 1.0. </string>
 
