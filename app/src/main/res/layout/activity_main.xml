@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Activity.ColdWalletActivity">
+    tools:context="systems.v.coldwallet.Activity.ColdWalletActivity">
 
     <include
         layout="@layout/toolbar"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="tech.vee.veecoldwallet">
+    package="systems.v.coldwallet">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -42,7 +42,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activity.ColdWalletActivity"
+            android:name="systems.v.coldwallet.Activity.ColdWalletActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
@@ -53,7 +53,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.ScannerActivity"
+            android:name="systems.v.coldwallet.Activity.ScannerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity
@@ -63,28 +63,28 @@
             android:stateNotNeeded="true"
             tools:replace="android:screenOrientation" />
         <activity
-            android:name=".Activity.ImportSeedActivity"
+            android:name="systems.v.coldwallet.Activity.ImportSeedActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.GenerateSeedActivity"
+            android:name="systems.v.coldwallet.Activity.GenerateSeedActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.ConfirmTxActivity"
+            android:name="systems.v.coldwallet.Activity.ConfirmTxActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.BackupSeedActivity"
+            android:name="systems.v.coldwallet.Activity.BackupSeedActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activity.SetPasswordActivity"
+        <activity android:name="systems.v.coldwallet.Activity.SetPasswordActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activity.AboutUsActivity"
+        <activity android:name="systems.v.coldwallet.Activity.AboutUsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
-        <receiver android:name=".Receiver.NetworkReceiver">
+        <receiver android:name="systems.v.coldwallet.Receiver.NetworkReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>

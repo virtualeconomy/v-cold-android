@@ -203,7 +203,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="4dp"
-                            android:src="@drawable/ic_vee" />
+                            android:src="@drawable/ic_vsys" />
 
                         <TextView
                             android:id="@+id/transaction_amount"
@@ -246,7 +246,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="4dp"
-                            android:src="@drawable/ic_vee" />
+                            android:src="@drawable/ic_vsys" />
 
                         <TextView
                             android:id="@+id/transaction_fee"

@@ -35,7 +35,7 @@
     <string name="settings_connectivity_summary">Check for wifi, data, and bluetooth</string>
 
     <string name="settings_about_us">About Us</string>
-    <string name="settings_about_us_summary">Learn more about VEE</string>
+    <string name="settings_about_us_summary">Learn more about VSYS</string>
 
     <!-- Strings related to Scanner -->
     <string name="scanner_tip">Align QR code within frame to scan</string>
@@ -119,7 +119,7 @@
     <string name="sign_transaction">Sign Transaction</string>
     <string name="backup_wallet">Backup Wallet</string>
     <string name="append_accounts">Add Accounts</string>
-    <string name="message">Welcome to VEE Cold Wallet! Press button below to start.</string>
+    <string name="message">Welcome to VSYS Cold Wallet! Press button below to start.</string>
 
     <!-- Strings related to Set Password -->
     <string name="set_password_title">Password</string>

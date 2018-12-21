@@ -19,7 +19,7 @@
         android:layout_height="48dp"
         android:contentDescription="@string/version_main"
         android:layout_marginTop="48dp"
-        app:srcCompat="@drawable/ic_vee" />
+        app:srcCompat="@drawable/ic_vsys" />
 
     <TextView
         android:id="@+id/version"
