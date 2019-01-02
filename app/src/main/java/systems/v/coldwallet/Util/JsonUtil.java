@@ -16,20 +16,20 @@ import java.util.HashMap;
 
 import systems.v.coldwallet.Activity.ColdWalletActivity;
 import systems.v.coldwallet.Activity.ConfirmTxActivity;
-import systems.v.coldwallet.Wallet.VSYSAccount;
-import systems.v.coldwallet.Wallet.VSYSWallet;
+import systems.v.coldwallet.Wallet.Account;
+import systems.v.coldwallet.Wallet.Wallet;
 
 public class JsonUtil {
     private final static String TAG = "Winston";
 
     @NonNull
     public static void checkTransferTx(Activity activity, HashMap<String, Object> jsonMap,
-                                       ArrayList<VSYSAccount> accounts) {
+                                       ArrayList<Account> accounts) {
         String senderPublicKey, recipient, attachment, assetId, feeAssetId;
         long amount, fee, timestamp;
         String[] keys = {"senderPublicKey", "recipient", "attachment",
                 "assetId", "feeAssetId", "amount", "fee", "timestamp"};
-        VSYSAccount senderAcc = null;
+        Account senderAcc = null;
 
         if (JsonUtil.containsKeys(jsonMap, keys)){
             senderPublicKey = (String) jsonMap.get("senderPublicKey");
@@ -41,7 +41,7 @@ public class JsonUtil {
             fee = Double.valueOf((double)jsonMap.get("fee")).longValue();
             timestamp = Double.valueOf((double)jsonMap.get("timestamp")).longValue();
 
-            for(VSYSAccount account:accounts){
+            for(Account account:accounts){
                 if(account.isAccount(senderPublicKey)){
                     Log.d(TAG, "Private key: " + account.getPriKey());
                     senderAcc = account;
@@ -50,7 +50,7 @@ public class JsonUtil {
 
             if (senderAcc != null) {
                 Gson gson = new Gson();
-                VSYSWallet wallet = ((ColdWalletActivity) activity).getWallet();
+                Wallet wallet = ((ColdWalletActivity) activity).getWallet();
                 String walletStr = gson.toJson(wallet);
                 Intent intent = new Intent(activity, ConfirmTxActivity.class);
                 intent.putExtra("ACTION", "TRANSFER");
@@ -81,12 +81,12 @@ public class JsonUtil {
 
     @NonNull
     public static void checkPaymentTx(Activity activity, HashMap<String, Object> jsonMap,
-                                       ArrayList<VSYSAccount> accounts) {
+                                       ArrayList<Account> accounts) {
         String senderPublicKey, recipient, attachment, assetId, feeAssetId;
         long amount, fee, timestamp;
         short feeScale;
         String[] keys = {"senderPublicKey", "recipient", "amount", "fee", "feeScale", "timestamp"};
-        VSYSAccount senderAcc = null;
+        Account senderAcc = null;
 
         if (JsonUtil.containsKeys(jsonMap, keys)){
             senderPublicKey = (String) jsonMap.get("senderPublicKey");
@@ -97,7 +97,7 @@ public class JsonUtil {
             feeScale = Double.valueOf((double)jsonMap.get("feeScale")).shortValue();
             timestamp = Double.valueOf((double)jsonMap.get("timestamp")).longValue();
 
-            for(VSYSAccount account:accounts){
+            for(Account account:accounts){
                 if(account.isAccount(senderPublicKey)){
                     Log.d(TAG, "Private key: " + account.getPriKey());
                     senderAcc = account;
@@ -106,7 +106,7 @@ public class JsonUtil {
 
             if (senderAcc != null) {
                 Gson gson = new Gson();
-                VSYSWallet wallet = ((ColdWalletActivity) activity).getWallet();
+                Wallet wallet = ((ColdWalletActivity) activity).getWallet();
                 String walletStr = gson.toJson(wallet);
                 Intent intent = new Intent(activity, ConfirmTxActivity.class);
                 intent.putExtra("ACTION", "PAYMENT");
@@ -136,12 +136,12 @@ public class JsonUtil {
 
     @NonNull
     public static void checkLeaseTx(Activity activity, HashMap<String, Object> jsonMap,
-                                       ArrayList<VSYSAccount> accounts) {
+                                       ArrayList<Account> accounts) {
         String senderPublicKey, recipient;
         long amount, fee, timestamp;
         short feeScale;
         String[] keys = {"senderPublicKey", "recipient", "amount", "fee", "feeScale", "timestamp"};
-        VSYSAccount senderAcc = null;
+        Account senderAcc = null;
 
         if (JsonUtil.containsKeys(jsonMap, keys)){
             senderPublicKey = (String) jsonMap.get("senderPublicKey");
@@ -151,7 +151,7 @@ public class JsonUtil {
             feeScale = Double.valueOf((double)jsonMap.get("feeScale")).shortValue();
             timestamp = Double.valueOf((double)jsonMap.get("timestamp")).longValue();
 
-            for(VSYSAccount account:accounts){
+            for(Account account:accounts){
                 if(account.isAccount(senderPublicKey)){
                     Log.d(TAG, "Private key: " + account.getPriKey());
                     senderAcc = account;
@@ -160,7 +160,7 @@ public class JsonUtil {
 
             if (senderAcc != null) {
                 Gson gson = new Gson();
-                VSYSWallet wallet = ((ColdWalletActivity) activity).getWallet();
+                Wallet wallet = ((ColdWalletActivity) activity).getWallet();
                 String walletStr = gson.toJson(wallet);
                 Intent intent = new Intent(activity, ConfirmTxActivity.class);
                 intent.putExtra("ACTION", "LEASE");
@@ -189,12 +189,12 @@ public class JsonUtil {
 
     @NonNull
     public static void checkCancelLeaseTx(Activity activity, HashMap<String, Object> jsonMap,
-                                       ArrayList<VSYSAccount> accounts) {
+                                       ArrayList<Account> accounts) {
         String senderPublicKey, txId;
         long fee, timestamp;
         short feeScale;
         String[] keys = {"senderPublicKey", "txId", "fee", "feeScale", "timestamp"};
-        VSYSAccount senderAcc = null;
+        Account senderAcc = null;
 
         if (JsonUtil.containsKeys(jsonMap, keys)){
             senderPublicKey = (String) jsonMap.get("senderPublicKey");
@@ -203,7 +203,7 @@ public class JsonUtil {
             feeScale = Double.valueOf((double)jsonMap.get("feeScale")).shortValue();
             timestamp = Double.valueOf((double)jsonMap.get("timestamp")).longValue();
 
-            for(VSYSAccount account:accounts){
+            for(Account account:accounts){
                 if(account.isAccount(senderPublicKey)){
                     Log.d(TAG, "Private key: " + account.getPriKey());
                     senderAcc = account;
@@ -212,7 +212,7 @@ public class JsonUtil {
 
             if (senderAcc != null) {
                 Gson gson = new Gson();
-                VSYSWallet wallet = ((ColdWalletActivity) activity).getWallet();
+                Wallet wallet = ((ColdWalletActivity) activity).getWallet();
                 String walletStr = gson.toJson(wallet);
                 Intent intent = new Intent(activity, ConfirmTxActivity.class);
                 intent.putExtra("ACTION", "CANCEL_LEASE");

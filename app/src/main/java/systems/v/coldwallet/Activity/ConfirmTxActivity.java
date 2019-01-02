@@ -13,14 +13,14 @@ import com.google.gson.Gson;
 
 import systems.v.coldwallet.R;
 import systems.v.coldwallet.Util.UIUtil;
-import systems.v.coldwallet.Wallet.VSYSAccount;
+import systems.v.coldwallet.Wallet.Account;
 
 public class ConfirmTxActivity extends AppCompatActivity {
     private static final String TAG = "Winston";
     private ActionBar actionBar;
     private ConfirmTxActivity activity;
 
-    private VSYSAccount sender;
+    private Account sender;
     private String recipient,assetId, feeAssetId, txId, attachment, walletStr;
     private long timestamp, amount, fee;
     private short feeScale;
@@ -43,7 +43,7 @@ public class ConfirmTxActivity extends AppCompatActivity {
             case "PAYMENT":
                 senderStr = intent.getStringExtra("SENDER");
 
-                sender = gson.fromJson(senderStr, VSYSAccount.class);
+                sender = gson.fromJson(senderStr, Account.class);
                 recipient = intent.getStringExtra("RECIPIENT");
                 amount= intent.getLongExtra("AMOUNT", 0);
                 fee = intent.getLongExtra("FEE", 0);
@@ -58,7 +58,7 @@ public class ConfirmTxActivity extends AppCompatActivity {
             case "TRANSFER":
                 senderStr = intent.getStringExtra("SENDER");
 
-                sender = gson.fromJson(senderStr, VSYSAccount.class);
+                sender = gson.fromJson(senderStr, Account.class);
                 recipient = intent.getStringExtra("RECIPIENT");
                 assetId = intent.getStringExtra("ASSET_ID");
                 feeAssetId = intent.getStringExtra("FEE_ASSET_ID");
@@ -74,7 +74,7 @@ public class ConfirmTxActivity extends AppCompatActivity {
             case "LEASE":
                 senderStr = intent.getStringExtra("SENDER");
 
-                sender = gson.fromJson(senderStr, VSYSAccount.class);
+                sender = gson.fromJson(senderStr, Account.class);
                 recipient = intent.getStringExtra("RECIPIENT");
                 amount= intent.getLongExtra("AMOUNT", 0);
                 fee = intent.getLongExtra("FEE", 0);
@@ -87,7 +87,7 @@ public class ConfirmTxActivity extends AppCompatActivity {
             case "CANCEL_LEASE":
                 senderStr = intent.getStringExtra("SENDER");
 
-                sender = gson.fromJson(senderStr, VSYSAccount.class);
+                sender = gson.fromJson(senderStr, Account.class);
                 txId = intent.getStringExtra("TX_ID");
                 fee = intent.getLongExtra("FEE", 0);
                 feeScale = intent.getShortExtra("FEESCALE", Short.valueOf("100"));

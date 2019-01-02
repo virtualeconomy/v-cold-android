@@ -24,9 +24,8 @@ import java.util.Map;
 import systems.v.coldwallet.Util.Base58;
 import systems.v.coldwallet.Util.HashUtil;
 
-@JsonDeserialize(using = VSYSTransaction.Deserializer.class)
-public class VSYSTransaction {
-    public static final String WAVES = "WAVES";
+@JsonDeserialize(using = Transaction.Deserializer.class)
+public class Transaction {
     public static final String TAG = "Winston";
 
     private final static Charset UTF8 = Charset.forName("UTF-8");
@@ -43,9 +42,9 @@ public class VSYSTransaction {
     private static final byte LEASE = 3;
     private static final byte LEASE_CANCEL = 4;
 
-    /** VSYSTransaction ID. */
+    /** Transaction ID. */
     public final String id;
-    /** VSYSTransaction data. */
+    /** Transaction data. */
     public final Map<String, Object> data;
     /**
      * List of proofs. Each proof is a Base58-encoded byte array of at most 64 bytes.
@@ -55,7 +54,7 @@ public class VSYSTransaction {
     final String endpoint;
     final byte[] bytes;
 
-    private VSYSTransaction(VSYSAccount signer, ByteBuffer buffer, String endpoint, Object... items) {
+    private Transaction(Account signer, ByteBuffer buffer, String endpoint, Object... items) {
         this.bytes = toBytes(buffer);
         this.id = hash(bytes);
         this.endpoint = endpoint;
@@ -71,7 +70,7 @@ public class VSYSTransaction {
         this.data = Collections.unmodifiableMap(map);
     }
 
-    private VSYSTransaction(Map<String, Object> data) {
+    private Transaction(Map<String, Object> data) {
         this.data = Collections.unmodifiableMap(data);
         this.id = (String) data.get("id");
         this.proofs = (List<String>) data.get("proofs");
@@ -80,7 +79,7 @@ public class VSYSTransaction {
     }
 
     @NonNull
-    public static VSYSTransaction makePaymentTx(VSYSAccount sender, String recipient, long amount,
+    public static Transaction makePaymentTx(Account sender, String recipient, long amount,
                                                 long fee, short feeScale, String attachment, BigInteger timestamp)
     {
         byte[] attachmentBytes = (attachment == null ? "" : attachment).getBytes();
@@ -92,7 +91,7 @@ public class VSYSTransaction {
         recipient = putRecipient(buf, sender.getChainId(), recipient);
         putString(buf, attachment);
 
-        return new VSYSTransaction(sender, buf,"/transactions/broadcast",
+        return new Transaction(sender, buf,"/transactions/broadcast",
                 "type", PAYMENT,
                 "version", V2,
                 "senderPublicKey", sender.getPubKey(),
@@ -105,7 +104,7 @@ public class VSYSTransaction {
     }
 
     @NonNull
-    public static VSYSTransaction makeTransferTx(VSYSAccount sender, String recipient, long amount, String assetId,
+    public static Transaction makeTransferTx(Account sender, String recipient, long amount, String assetId,
                                                  long fee, String feeAssetId, String attachment, BigInteger timestamp)
     {
         byte[] attachmentBytes = (attachment == null ? "" : attachment).getBytes();
@@ -118,28 +117,28 @@ public class VSYSTransaction {
         recipient = putRecipient(buf, sender.getChainId(), recipient);
         putString(buf, attachment);
 
-        return new VSYSTransaction(sender, buf,"/transactions/broadcast",
+        return new Transaction(sender, buf,"/transactions/broadcast",
                 "type", TRANSFER,
                 "version", V2,
                 "senderPublicKey", sender.getPubKey(),
                 "recipient", recipient,
                 "amount", amount,
-                "assetId", VSYSAsset.toJsonObject(assetId),
+                "assetId", Asset.toJsonObject(assetId),
                 "fee", fee,
-                "feeAssetId", VSYSAsset.toJsonObject(feeAssetId),
+                "feeAssetId", Asset.toJsonObject(feeAssetId),
                 "timestamp", timestamp,
                 "attachment", Base58.encode(attachmentBytes));
     }
 
     @NonNull
-    public static VSYSTransaction makeLeaseTx(VSYSAccount sender, String recipient, long amount, long fee, short feeScale, BigInteger timestamp) {
+    public static Transaction makeLeaseTx(Account sender, String recipient, long amount, long fee, short feeScale, BigInteger timestamp) {
         ByteBuffer buf = ByteBuffer.allocate(KBYTE);
         buf.put(LEASE);
         recipient = putRecipient(buf, sender.getChainId(), recipient);
         buf.putLong(amount).putLong(fee);
         buf.putShort(feeScale);
         putBigInteger(buf, timestamp);
-        return new VSYSTransaction(sender, buf,"/transactions/broadcast",
+        return new Transaction(sender, buf,"/transactions/broadcast",
                 "type", LEASE,
                 "version", V2,
                 "senderPublicKey", sender.getPubKey(),
@@ -151,13 +150,13 @@ public class VSYSTransaction {
     }
 
 
-    public static VSYSTransaction makeLeaseCancelTx(VSYSAccount sender, String txId, long fee, short feeScale, BigInteger timestamp) {
+    public static Transaction makeLeaseCancelTx(Account sender, String txId, long fee, short feeScale, BigInteger timestamp) {
         ByteBuffer buf = ByteBuffer.allocate(KBYTE);
         buf.put(LEASE_CANCEL).putLong(fee);
         buf.putShort(feeScale);
         putBigInteger(buf, timestamp);
         buf.put(Base58.decode(txId));
-        return new VSYSTransaction(sender, buf,"/transactions/broadcast",
+        return new Transaction(sender, buf,"/transactions/broadcast",
                 "type", LEASE_CANCEL,
                 "version", V2,
                 "senderPublicKey", sender.getPubKey(),
@@ -167,11 +166,11 @@ public class VSYSTransaction {
                 "timestamp", timestamp);
     }
 
-    static class Deserializer extends JsonDeserializer<VSYSTransaction> {
+    static class Deserializer extends JsonDeserializer<Transaction> {
         @Override
-        public VSYSTransaction deserialize(JsonParser p, DeserializationContext context) throws IOException {
+        public Transaction deserialize(JsonParser p, DeserializationContext context) throws IOException {
             Map<String, Object> data = mapper.convertValue(p.getCodec().readTree(p), TX_INFO);
-            return new VSYSTransaction(data);
+            return new Transaction(data);
         }
     }
 
@@ -220,7 +219,7 @@ public class VSYSTransaction {
     }
 
     @NonNull
-    private String sign(VSYSAccount account, byte[] bytes){
+    private String sign(Account account, byte[] bytes){
         return Base58.encode(cipher.calculateSignature(Base58.decode(account.getPriKey()), bytes));
     }
     private static byte[] toBytes(ByteBuffer buffer) {
@@ -236,7 +235,7 @@ public class VSYSTransaction {
     }
 
     private static void putAsset(ByteBuffer buffer, String assetId) {
-        if (VSYSAsset.isVSYS(assetId)) {
+        if (Asset.isVSYS(assetId)) {
             buffer.put((byte) 0);
         } else {
             buffer.put((byte) 1).put(Base58.decode(assetId));

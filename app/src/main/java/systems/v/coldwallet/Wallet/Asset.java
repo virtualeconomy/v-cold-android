@@ -1,13 +1,13 @@
 package systems.v.coldwallet.Wallet;
 
-public abstract class VSYSAsset {
+public abstract class Asset {
     /**
      * Constant used to represent VSYS token in asset transactions.
      */
     public static final String VSYS = "VSYS";
 
     static String normalize(String assetId) {
-        return assetId == null || assetId.isEmpty() ? VSYSAsset.VSYS : assetId;
+        return assetId == null || assetId.isEmpty() ? Asset.VSYS : assetId;
     }
 
     static boolean isVSYS(String assetId) {

@@ -10,8 +10,8 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import java.util.HashMap;
 
 import systems.v.coldwallet.Activity.ScannerActivity;
-import systems.v.coldwallet.Wallet.VSYSAccount;
-import systems.v.coldwallet.Wallet.VSYSWallet;
+import systems.v.coldwallet.Wallet.Account;
+import systems.v.coldwallet.Wallet.Wallet;
 
 public class QRCodeUtil {
     private static final String TAG = "Winston";
@@ -30,21 +30,21 @@ public class QRCodeUtil {
         return qrCode;
     }
 
-    public static String generatePubKeyAddrStr(VSYSAccount account) {
+    public static String generatePubKeyAddrStr(Account account) {
         return DOMAIN + "/#cold/export?address=" + account.getAddress() + "&publicKey=" + account.getPubKey();
     }
 
-    public static String generateSeedStr(VSYSWallet wallet) {
+    public static String generateSeedStr(Wallet wallet) {
         return DOMAIN + "/#cold/export?seed=" + wallet.getSeed();
     }
 
-    public static Bitmap exportPubKeyAddr(VSYSAccount account, int width){
+    public static Bitmap exportPubKeyAddr(Account account, int width){
         String message;
         message = generatePubKeyAddrStr(account);
         return generateQRCode(message, width);
     }
 
-    public static Bitmap exportSeed(VSYSWallet wallet, int width){
+    public static Bitmap exportSeed(Wallet wallet, int width){
         String message;
         message = generateSeedStr(wallet);
         return generateQRCode(message, width);

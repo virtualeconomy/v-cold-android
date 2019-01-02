@@ -15,8 +15,8 @@ import systems.v.coldwallet.Activity.ColdWalletActivity;
 import systems.v.coldwallet.R;
 import systems.v.coldwallet.Util.FileUtil;
 import systems.v.coldwallet.Util.UIUtil;
-import systems.v.coldwallet.Wallet.VSYSChain;
-import systems.v.coldwallet.Wallet.VSYSWallet;
+import systems.v.coldwallet.Wallet.Chain;
+import systems.v.coldwallet.Wallet.Wallet;
 
 
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
@@ -25,7 +25,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private PreferenceScreen preferenceScreen;
     private SwitchPreference backup;
     private SwitchPreference monitor;
-    private VSYSWallet wallet;
+    private Wallet wallet;
     private PreferenceScreen aboutUs;
     private byte chainId;
 
@@ -67,7 +67,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Intent intent = new Intent();
-                intent.putExtra("CHAIN_ID", VSYSChain.getChainId(network.getValue()));
+                intent.putExtra("CHAIN_ID", Chain.getChainId(network.getValue()));
                 intent.setClass(activity, AboutUsActivity.class);
                 startActivity(intent);
                 return true;
@@ -94,7 +94,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     }
 
     private void setNetworkSettingsTitle(String value) {
-        if (VSYSChain.getChainId(value) == VSYSChain.MAIN_NET) {
+        if (Chain.getChainId(value) == Chain.MAIN_NET) {
             network.setTitle(R.string.settings_network_mainnet);
         } else {
             network.setTitle(R.string.settings_network_testnet);

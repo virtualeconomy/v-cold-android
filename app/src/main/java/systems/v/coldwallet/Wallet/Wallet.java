@@ -18,7 +18,7 @@ import systems.v.coldwallet.Util.Base58;
 import systems.v.coldwallet.Util.HashUtil;
 import systems.v.coldwallet.Util.JsonUtil;
 
-public class VSYSWallet {
+public class Wallet {
     private String seed;
     private List<String> accountSeeds;
     private long nonce;
@@ -217,15 +217,15 @@ public class VSYSWallet {
             "wrist", "write", "wrong", "yard", "year", "yellow", "you", "young", "youth", "zebra", "zero", "zone", "zoo"
     };
 
-    public VSYSWallet(){
+    public Wallet(){
         seed = "";
         accountSeeds = new ArrayList<>();
         nonce = 0;
-        chainId = VSYSChain.MAIN_NET;
+        chainId = Chain.MAIN_NET;
         agent = "V Wallet Specification:" + WALLET_VERSION + "/" + AGENT_NAME + ":" + AGENT_VERSION;
     }
 
-    public VSYSWallet(byte chainId, String seed, List<String> accountSeeds, long nonce){
+    public Wallet(byte chainId, String seed, List<String> accountSeeds, long nonce){
         this.chainId = chainId;
         this.seed = seed;
         this.accountSeeds = accountSeeds;
@@ -233,16 +233,16 @@ public class VSYSWallet {
 
         String chain ="";
         switch (chainId) {
-            case VSYSChain.MAIN_NET:
+            case Chain.MAIN_NET:
                 chain = "mainnet";
                 break;
-            case VSYSChain.TEST_NET:
+            case Chain.TEST_NET:
                 chain = "testnet";
         }
         agent = "V Wallet Specification:" + WALLET_VERSION + "/" + AGENT_NAME + ":" + AGENT_VERSION + "/" + chain;
         Log.d(TAG, agent);
     }
-    public VSYSWallet(byte chainId, String json){
+    public Wallet(byte chainId, String json){
         HashMap<String,Object> jsonMap = JsonUtil.getJsonAsMap(json);
         String[] keys = {"seed", "accountSeeds", "nonce", "agent"};
 
@@ -262,7 +262,7 @@ public class VSYSWallet {
     public String getAgent() { return agent; }
     public byte getChainId() { return chainId; }
 
-    public static VSYSWallet recover(byte chainId, String seed, long num){
+    public static Wallet recover(byte chainId, String seed, long num){
         String accountSeed;
         List<String> newAccountSeeds = new ArrayList<>();
 
@@ -272,7 +272,7 @@ public class VSYSWallet {
                 //accountSeed = generateAccountSeedOld(seed, i);
                 newAccountSeeds.add(accountSeed);
             }
-            return new VSYSWallet(chainId, seed, newAccountSeeds, num);
+            return new Wallet(chainId, seed, newAccountSeeds, num);
         }
         Log.d(TAG, "Invalid recover");
         return null;
@@ -309,12 +309,12 @@ public class VSYSWallet {
         }
     }
 
-    public ArrayList<VSYSAccount> generateAccounts() {
-        ArrayList<VSYSAccount> accounts = new ArrayList<>();
-        VSYSAccount account;
+    public ArrayList<Account> generateAccounts() {
+        ArrayList<Account> accounts = new ArrayList<>();
+        Account account;
 
         for(long i = 0; i < accountSeeds.size(); i++){
-            account = new VSYSAccount(accountSeeds.get((int) i), i, chainId);
+            account = new Account(accountSeeds.get((int) i), i, chainId);
             Log.d(TAG, account.toString());
             accounts.add(account);
         }
