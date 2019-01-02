@@ -26,7 +26,7 @@ public class Wallet {
     private byte chainId;
 
     private static final String TAG = "Winston";
-    private static final String WALLET_VERSION = "0.1.0";
+    private static final String WALLET_SPECIFICATION = "1.0";
     private static final String AGENT_VERSION = "0.1.0";
     private static final String AGENT_NAME = "V Cold Wallet Android";
 
@@ -222,7 +222,8 @@ public class Wallet {
         accountSeeds = new ArrayList<>();
         nonce = 0;
         chainId = Chain.MAIN_NET;
-        agent = "V Wallet Specification:" + WALLET_VERSION + "/" + AGENT_NAME + ":" + AGENT_VERSION;
+
+        setAgent();
     }
 
     public Wallet(byte chainId, String seed, List<String> accountSeeds, long nonce){
@@ -231,16 +232,7 @@ public class Wallet {
         this.accountSeeds = accountSeeds;
         this.nonce = nonce;
 
-        String chain ="";
-        switch (chainId) {
-            case Chain.MAIN_NET:
-                chain = "mainnet";
-                break;
-            case Chain.TEST_NET:
-                chain = "testnet";
-        }
-        agent = "V Wallet Specification:" + WALLET_VERSION + "/" + AGENT_NAME + ":" + AGENT_VERSION + "/" + chain;
-        Log.d(TAG, agent);
+        setAgent();
     }
     public Wallet(byte chainId, String json){
         HashMap<String,Object> jsonMap = JsonUtil.getJsonAsMap(json);
@@ -357,5 +349,18 @@ public class Wallet {
         buf.put(noncedSecret.getBytes());
         byte[] accountSeed = HashUtil.secureHash(buf.array(), 0, buf.array().length);
         return Base58.encode(accountSeed);
+    }
+
+    private void setAgent() {
+        String chain = "";
+        switch (chainId) {
+            case Chain.MAIN_NET:
+                chain = "mainnet";
+                break;
+            case Chain.TEST_NET:
+                chain = "testnet";
+        }
+        agent = "V Systems Wallet Specification:" + WALLET_SPECIFICATION + "/" + AGENT_NAME + ":" + AGENT_VERSION + "/" + chain;
+        Log.d(TAG, agent);
     }
 }
