@@ -36,7 +36,7 @@ import systems.v.coldwallet.Util.PermissionUtil;
 import systems.v.coldwallet.Util.UIUtil;
 import systems.v.coldwallet.Wallet.Account;
 import systems.v.coldwallet.Wallet.Chain;
-import systems.v.coldwallet.Wallet.VSYSTransaction;
+import systems.v.coldwallet.Wallet.Transaction;
 import systems.v.coldwallet.R;
 import systems.v.coldwallet.Fragment.SettingsFragment;
 import systems.v.coldwallet.Fragment.WalletFragment;
@@ -234,7 +234,7 @@ public class ColdWalletActivity extends AppCompatActivity {
                     //Toast.makeText(activity, jsonMap.toString(), Toast.LENGTH_LONG).show();
 
                     byte txType = -1;
-                    VSYSTransaction transaction = null;
+                    Transaction transaction = null;
 
                     if (jsonMap.containsKey("api")) {
                         byte api = Double.valueOf((double)jsonMap.get("api")).byteValue();

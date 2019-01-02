@@ -30,7 +30,7 @@ import systems.v.coldwallet.Activity.ColdWalletActivity;
 import systems.v.coldwallet.Activity.ConfirmTxActivity;
 import systems.v.coldwallet.Activity.SetPasswordActivity;
 import systems.v.coldwallet.Fragment.WalletFragment;
-import systems.v.coldwallet.Wallet.VSYSTransaction;
+import systems.v.coldwallet.Wallet.Transaction;
 import systems.v.coldwallet.R;
 import systems.v.coldwallet.Wallet.Account;
 import systems.v.coldwallet.Wallet.Wallet;
@@ -200,7 +200,7 @@ public class UIUtil {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VSYSTransaction transaction = VSYSTransaction.makePaymentTx(sender, recipient,
+                Transaction transaction = Transaction.makePaymentTx(sender, recipient,
                         amount, fee, feeScale, attachment, timeBigInteger);
                 createSignatureDialog(activity, transaction);
             }
@@ -271,7 +271,7 @@ public class UIUtil {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VSYSTransaction transaction = VSYSTransaction.makeTransferTx(sender, recipient,
+                Transaction transaction = Transaction.makeTransferTx(sender, recipient,
                         amount, assetId, fee, feeAssetId, attachment, timeBigInteger);
                 createSignatureDialog(activity, transaction);
             }
@@ -335,7 +335,7 @@ public class UIUtil {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VSYSTransaction transaction = VSYSTransaction.makeLeaseTx(sender, recipient,
+                Transaction transaction = Transaction.makeLeaseTx(sender, recipient,
                         amount, fee, feeScale, timeBigInteger);
                 createSignatureDialog(activity, transaction);
             }
@@ -379,13 +379,13 @@ public class UIUtil {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VSYSTransaction transaction = VSYSTransaction.makeLeaseCancelTx(sender, txId, fee, feeScale, timeBigInteger);
+                Transaction transaction = Transaction.makeLeaseCancelTx(sender, txId, fee, feeScale, timeBigInteger);
                 createSignatureDialog(activity, transaction);
             }
         });
     }
 
-    public static void createSignatureDialog(final Activity activity, VSYSTransaction transaction) {
+    public static void createSignatureDialog(final Activity activity, Transaction transaction) {
         final Dialog dialog = new Dialog(activity);
         dialog.setContentView(R.layout.custom_dialog_signature);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
