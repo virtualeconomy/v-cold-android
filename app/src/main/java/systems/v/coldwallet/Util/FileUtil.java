@@ -21,7 +21,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 import systems.v.coldwallet.Activity.ColdWalletActivity;
-import systems.v.coldwallet.Wallet.VSYSWallet;
+import systems.v.coldwallet.Wallet.Wallet;
 
 public class FileUtil {
     private final static String TAG = "Winston";
@@ -124,7 +124,7 @@ public class FileUtil {
         return false;
     }
 
-    public static void backup(Activity activity, VSYSWallet wallet, String password, String walletFileName) {
+    public static void backup(Activity activity, Wallet wallet, String password, String walletFileName) {
         String backupWalletFilePath;
 
         if(sdCardMountedExists()){

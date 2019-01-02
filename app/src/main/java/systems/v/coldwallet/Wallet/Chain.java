@@ -1,6 +1,6 @@
 package systems.v.coldwallet.Wallet;
 
-public class VSYSChain {
+public class Chain {
     public static final byte TEST_NET = 'T';
     public static final byte MAIN_NET = 'M';
 

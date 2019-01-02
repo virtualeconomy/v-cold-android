@@ -25,8 +25,8 @@ import systems.v.coldwallet.R;
 import systems.v.coldwallet.Util.FileUtil;
 import systems.v.coldwallet.Util.UIUtil;
 import systems.v.coldwallet.Util.QRCodeUtil;
-import systems.v.coldwallet.Wallet.VSYSAccount;
-import systems.v.coldwallet.Wallet.VSYSWallet;
+import systems.v.coldwallet.Wallet.Account;
+import systems.v.coldwallet.Wallet.Wallet;
 
 public class WalletFragment extends Fragment {
     private static final String TAG = "Winston";
@@ -43,9 +43,9 @@ public class WalletFragment extends Fragment {
     private FloatingActionButton generateSeed;
     private FloatingActionButton loadBackup;
 
-    private VSYSWallet wallet;
+    private Wallet wallet;
     private String walletFilePath;
-    private ArrayList<VSYSAccount> accounts;
+    private ArrayList<Account> accounts;
 
     private String password;
 
@@ -183,7 +183,7 @@ public class WalletFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
-    public void refreshAccounts(ArrayList<VSYSAccount> accounts){
+    public void refreshAccounts(ArrayList<Account> accounts){
         adapter = new AccountAdapter(accounts);
 
         if (accounts != null){
@@ -241,10 +241,10 @@ public class WalletFragment extends Fragment {
      * Used to display all existing accounts in a scrollable recycler view
      */
     public class AccountAdapter extends RecyclerView.Adapter<AccountHolder> {
-        private ArrayList<VSYSAccount> accounts;
+        private ArrayList<Account> accounts;
         private boolean flag = true;
 
-        public AccountAdapter(ArrayList<VSYSAccount> accounts) {
+        public AccountAdapter(ArrayList<Account> accounts) {
             this.accounts = accounts;
         }
 
@@ -262,7 +262,7 @@ public class WalletFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(final AccountHolder holder, int position) {
-            final VSYSAccount account = accounts.get(position);
+            final Account account = accounts.get(position);
             holder.accountName.setText(account.getAccountName());
             holder.mutatedAddress.setText(account.getMutatedAddress());
 

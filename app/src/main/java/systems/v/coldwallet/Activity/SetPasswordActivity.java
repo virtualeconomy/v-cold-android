@@ -32,8 +32,8 @@ import com.nulabinc.zxcvbn.Zxcvbn;
 import systems.v.coldwallet.R;
 import systems.v.coldwallet.Util.FileUtil;
 import systems.v.coldwallet.Util.UIUtil;
-import systems.v.coldwallet.Wallet.VSYSChain;
-import systems.v.coldwallet.Wallet.VSYSWallet;
+import systems.v.coldwallet.Wallet.Chain;
+import systems.v.coldwallet.Wallet.Wallet;
 
 public class SetPasswordActivity extends AppCompatActivity {
     private static final String TAG = "Winston";
@@ -276,8 +276,8 @@ public class SetPasswordActivity extends AppCompatActivity {
 
 
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                byte chainId = VSYSChain.getChainId(preferences.getString("settings_network", "M"));
-                VSYSWallet wallet = VSYSWallet.recover(chainId, seed, accountNum);
+                byte chainId = Chain.getChainId(preferences.getString("settings_network", "M"));
+                Wallet wallet = Wallet.recover(chainId, seed, accountNum);
 
                 boolean monitorState = preferences.getBoolean("settings_auto_backup", true);
                 if (monitorState) {

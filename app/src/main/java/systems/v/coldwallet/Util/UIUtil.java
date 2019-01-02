@@ -32,11 +32,11 @@ import systems.v.coldwallet.Activity.SetPasswordActivity;
 import systems.v.coldwallet.Fragment.WalletFragment;
 import systems.v.coldwallet.Wallet.VSYSTransaction;
 import systems.v.coldwallet.R;
-import systems.v.coldwallet.Wallet.VSYSAccount;
-import systems.v.coldwallet.Wallet.VSYSWallet;
+import systems.v.coldwallet.Wallet.Account;
+import systems.v.coldwallet.Wallet.Wallet;
 
 public class UIUtil {
-    public static void createExportSeedDialog(final Activity activity, VSYSWallet wallet) {
+    public static void createExportSeedDialog(final Activity activity, Wallet wallet) {
         if (wallet != null) {
             final Dialog dialog = new Dialog(activity);
             dialog.setContentView(R.layout.custom_dialog_export_seed);
@@ -107,7 +107,7 @@ public class UIUtil {
     }
 
 
-    public static void createExportAddressDialog(final Activity activity, VSYSAccount account) {
+    public static void createExportAddressDialog(final Activity activity, Account account) {
         if (account != null) {
             final Dialog dialog = new Dialog(activity);
             dialog.setContentView(R.layout.custom_dialog_export_address);
@@ -138,7 +138,7 @@ public class UIUtil {
             dialog.show();
     }
 
-    public static void setPaymentTx(final Activity activity, final VSYSAccount sender,
+    public static void setPaymentTx(final Activity activity, final Account sender,
                                               final String recipient, final long amount,
                                               final long fee, final short feeScale, final String attachment, long timestamp) {
         activity.setContentView(R.layout.custom_layout_payment_tx);
@@ -153,7 +153,7 @@ public class UIUtil {
 
         Log.d("Winston", amount + " " + fee);
         senderTx.setText(sender.getMutatedAddress());
-        recipientTx.setText(VSYSAccount.getMutatedAddress(recipient));
+        recipientTx.setText(Account.getMutatedAddress(recipient));
         amountTx.setText(String.valueOf(convert(amount)));
         feeTx.setText(String.valueOf(convert(fee)));
 
@@ -191,7 +191,7 @@ public class UIUtil {
                     recipientTx.setTag("COMPLETE");
                 }
                 else {
-                    recipientTx.setText(VSYSAccount.getMutatedAddress(recipient));
+                    recipientTx.setText(Account.getMutatedAddress(recipient));
                     recipientTx.setTag("MUTATED");
                 }
             }
@@ -207,7 +207,7 @@ public class UIUtil {
         });
     }
 
-    public static void setTransferTx(final Activity activity, final VSYSAccount sender,
+    public static void setTransferTx(final Activity activity, final Account sender,
                                               final String recipient, final long amount,
                                               final String assetId, final long fee,
                                               final String feeAssetId, final String attachment,
@@ -223,7 +223,7 @@ public class UIUtil {
         Button confirm = (Button) activity.findViewById(R.id.transaction_confirm);
 
         senderTx.setText(sender.getMutatedAddress());
-        recipientTx.setText(VSYSAccount.getMutatedAddress(recipient));
+        recipientTx.setText(Account.getMutatedAddress(recipient));
         amountTx.setText(String.valueOf(convert(amount)));
         feeTx.setText(String.valueOf(convert(fee)));
 
@@ -262,7 +262,7 @@ public class UIUtil {
                     recipientTx.setTag("COMPLETE");
                 }
                 else {
-                    recipientTx.setText(VSYSAccount.getMutatedAddress(recipient));
+                    recipientTx.setText(Account.getMutatedAddress(recipient));
                     recipientTx.setTag("MUTATED");
                 }
             }
@@ -278,7 +278,7 @@ public class UIUtil {
         });
     }
 
-    public static void setLeaseTx(final Activity activity, final VSYSAccount sender,
+    public static void setLeaseTx(final Activity activity, final Account sender,
                                               final String recipient, final long amount,
                                               final long fee, final short feeScale, long timestamp) {
         activity.setContentView(R.layout.custom_layout_lease_tx);
@@ -291,7 +291,7 @@ public class UIUtil {
         Button confirm = (Button) activity.findViewById(R.id.transaction_confirm);
 
         senderTx.setText(sender.getMutatedAddress());
-        recipientTx.setText(VSYSAccount.getMutatedAddress(recipient));
+        recipientTx.setText(Account.getMutatedAddress(recipient));
         amountTx.setText(String.valueOf(convert(amount)));
         feeTx.setText(String.valueOf(convert(fee)));
 
@@ -326,7 +326,7 @@ public class UIUtil {
                     recipientTx.setTag("COMPLETE");
                 }
                 else {
-                    recipientTx.setText(VSYSAccount.getMutatedAddress(recipient));
+                    recipientTx.setText(Account.getMutatedAddress(recipient));
                     recipientTx.setTag("MUTATED");
                 }
             }
@@ -342,7 +342,7 @@ public class UIUtil {
         });
     }
 
-    public static void setCancelLeaseTx(final Activity activity, final VSYSAccount sender,
+    public static void setCancelLeaseTx(final Activity activity, final Account sender,
                                            final String txId, final long fee, final short feeScale, long timestamp) {
         activity.setContentView(R.layout.custom_layout_cancel_lease_tx);
 
@@ -654,7 +654,7 @@ public class UIUtil {
     // Set adapter for account cards
     public static void setAccountCardsAdapter(Activity activity, RecyclerView accountCards,
                                               WalletFragment.AccountAdapter adapter,
-                                              ArrayList<VSYSAccount> accounts){
+                                              ArrayList<Account> accounts){
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 

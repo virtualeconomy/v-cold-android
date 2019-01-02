@@ -10,7 +10,7 @@ import java.util.Arrays;
 import systems.v.coldwallet.Util.HashUtil;
 import systems.v.coldwallet.Util.Base58;
 
-public class VSYSAccount {
+public class Account {
     String accountSeed;
     long nonce;
     byte chainId;
@@ -23,7 +23,7 @@ public class VSYSAccount {
     private static final byte ADDR_VERSION = 5;
 
     // Create new account using valid seed phrase
-    public VSYSAccount(String accountSeed, long nonce, byte chainId) {
+    public Account(String accountSeed, long nonce, byte chainId) {
         this.accountSeed = accountSeed;
         this.nonce = nonce;
         this.chainId = chainId;

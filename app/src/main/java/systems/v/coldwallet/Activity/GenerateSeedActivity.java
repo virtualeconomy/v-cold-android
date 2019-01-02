@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import systems.v.coldwallet.R;
-import systems.v.coldwallet.Wallet.VSYSWallet;
+import systems.v.coldwallet.Wallet.Wallet;
 
 public class GenerateSeedActivity extends AppCompatActivity {
     private GenerateSeedActivity activity;
@@ -51,7 +51,7 @@ public class GenerateSeedActivity extends AppCompatActivity {
         copy = findViewById(R.id.generate_seed_copy);
         confirm = findViewById(R.id.generate_seed_confirm);
 
-        seed = VSYSWallet.generateSeed();
+        seed = Wallet.generateSeed();
         seedText.setText(formatSeed(seed));
 
         copy.setOnClickListener(new View.OnClickListener() {

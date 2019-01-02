@@ -34,15 +34,15 @@ import systems.v.coldwallet.Util.FileUtil;
 import systems.v.coldwallet.Util.NetworkUtil;
 import systems.v.coldwallet.Util.PermissionUtil;
 import systems.v.coldwallet.Util.UIUtil;
-import systems.v.coldwallet.Wallet.VSYSAccount;
-import systems.v.coldwallet.Wallet.VSYSChain;
+import systems.v.coldwallet.Wallet.Account;
+import systems.v.coldwallet.Wallet.Chain;
 import systems.v.coldwallet.Wallet.VSYSTransaction;
 import systems.v.coldwallet.R;
 import systems.v.coldwallet.Fragment.SettingsFragment;
 import systems.v.coldwallet.Fragment.WalletFragment;
 import systems.v.coldwallet.Util.JsonUtil;
 import systems.v.coldwallet.Util.QRCodeUtil;
-import systems.v.coldwallet.Wallet.VSYSWallet;
+import systems.v.coldwallet.Wallet.Wallet;
 
 public class ColdWalletActivity extends AppCompatActivity {
     private static final String TAG = "Winston";
@@ -57,10 +57,10 @@ public class ColdWalletActivity extends AppCompatActivity {
 
     private String qrContents;
 
-    private VSYSWallet wallet;
+    private Wallet wallet;
     private File walletFile;
     private String walletFilePath;
-    private ArrayList<VSYSAccount> accounts;
+    private ArrayList<Account> accounts;
     private String password;
 
     @Override
@@ -104,7 +104,7 @@ public class ColdWalletActivity extends AppCompatActivity {
 
         if(walletStr != null) {
             Gson gson = new Gson();
-            wallet = gson.fromJson(walletStr, VSYSWallet.class);
+            wallet = gson.fromJson(walletStr, Wallet.class);
             accounts = wallet.generateAccounts();
             switchToFragment(walletFrag);
         }
@@ -270,7 +270,7 @@ public class ColdWalletActivity extends AppCompatActivity {
 
                 case 2:
                     String seed = QRCodeUtil.parseSeed(qrContents);
-                    if (VSYSWallet.validateSeedPhrase(activity, seed)) {
+                    if (Wallet.validateSeedPhrase(activity, seed)) {
                         Intent intent = new Intent(activity, SetPasswordActivity.class);
                         intent.putExtra("SEED", seed);
                         startActivity(intent);
@@ -293,11 +293,11 @@ public class ColdWalletActivity extends AppCompatActivity {
         }
     }
 
-    public VSYSWallet getWallet() {
+    public Wallet getWallet() {
         return wallet;
     }
 
-    public void setWallet(VSYSWallet wallet) {
+    public void setWallet(Wallet wallet) {
         this.wallet = wallet;
         accounts = wallet.generateAccounts();
     }
@@ -358,8 +358,8 @@ public class ColdWalletActivity extends AppCompatActivity {
                 String seed = FileUtil.load(password, walletFilePath);
                 if (seed != "" && seed != FileUtil.ERROR) {
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    byte chainId = VSYSChain.getChainId(preferences.getString("settings_network", "M"));
-                    wallet = new VSYSWallet(chainId, seed);
+                    byte chainId = Chain.getChainId(preferences.getString("settings_network", "M"));
+                    wallet = new Wallet(chainId, seed);
                     accounts = wallet.generateAccounts();
                     if (accounts == null) {Log.d(TAG, "Accounts null"); }
                     switchToFragment(walletFrag);

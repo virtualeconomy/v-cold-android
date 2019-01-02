@@ -25,7 +25,7 @@ import com.google.zxing.integration.android.IntentResult;
 import systems.v.coldwallet.R;
 import systems.v.coldwallet.Util.QRCodeUtil;
 import systems.v.coldwallet.Util.UIUtil;
-import systems.v.coldwallet.Wallet.VSYSWallet;
+import systems.v.coldwallet.Wallet.Wallet;
 
 public class ImportSeedActivity extends AppCompatActivity {
     private static final String TAG = "Winston";
@@ -84,7 +84,7 @@ public class ImportSeedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String seed = input.getText().toString();
-                if (VSYSWallet.validateSeedPhrase(activity, seed)) {
+                if (Wallet.validateSeedPhrase(activity, seed)) {
                     Intent intent = new Intent(activity, SetPasswordActivity.class);
                     intent.putExtra("SEED", seed);
                     startActivity(intent);
@@ -109,7 +109,7 @@ public class ImportSeedActivity extends AppCompatActivity {
 
                 case 2:
                     String seed = QRCodeUtil.parseSeed(qrContents);
-                    if (VSYSWallet.validateSeedPhrase(activity, seed)) {
+                    if (Wallet.validateSeedPhrase(activity, seed)) {
                         Intent intent = new Intent(activity, SetPasswordActivity.class);
                         intent.putExtra("SEED", seed);
                         startActivity(intent);

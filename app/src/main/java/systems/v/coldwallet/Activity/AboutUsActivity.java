@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import systems.v.coldwallet.R;
-import systems.v.coldwallet.Wallet.VSYSChain;
+import systems.v.coldwallet.Wallet.Chain;
 
 public class AboutUsActivity extends AppCompatActivity {
     private ActionBar actionBar;
@@ -44,10 +44,10 @@ public class AboutUsActivity extends AppCompatActivity {
         chain = intent.getByteExtra("CHAIN_ID", (byte)0);
 
         switch (chain) {
-            case VSYSChain.MAIN_NET:
+            case Chain.MAIN_NET:
                 version.setText(R.string.version_main);
                 break;
-            case VSYSChain.TEST_NET:
+            case Chain.TEST_NET:
                 version.setText(R.string.version_test);
                 break;
         }
