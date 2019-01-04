@@ -238,7 +238,7 @@ public class ColdWalletActivity extends AppCompatActivity {
 
                     if (jsonMap.containsKey("api")) {
                         byte api = Double.valueOf((double)jsonMap.get("api")).byteValue();
-                        if (api > 1) {
+                        if (api > Wallet.API_VERSION) {
                             UIUtil.createUpdateAppDialog(activity);
                             break;
                         }
@@ -284,8 +284,8 @@ public class ColdWalletActivity extends AppCompatActivity {
                     UIUtil.createForeignSeedDialog(activity, qrContents);
 
                 case 4:
-                    UIUtil.createWrongTransactionDialog(activity);
-                    //Toast.makeText(activity, "Incorrect transaction format", Toast.LENGTH_LONG).show();
+                    //UIUtil.createWrongTransactionDialog(activity);
+                    Toast.makeText(activity, "Incorrect transaction format", Toast.LENGTH_LONG).show();
             }
         }
         else {
