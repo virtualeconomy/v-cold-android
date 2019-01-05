@@ -264,7 +264,6 @@ public class Wallet {
         if (seed != null && num > 0) {
             for(long i = 0; i < num; i++) {
                 accountSeed = generateAccountSeed(seed, i);
-                //accountSeed = generateAccountSeedOld(seed, i);
                 newAccountSeeds.add(accountSeed);
             }
             return new Wallet(chainId, seed, newAccountSeeds, num);
@@ -279,7 +278,6 @@ public class Wallet {
         if (num > 0) {
             for (long i = nonce; i < nonce + num; i++) {
                 accountSeed = generateAccountSeed(seed, i);
-                //accountSeed = generateAccountSeedOld(seed, i);
                 accountSeeds.add(accountSeed);
             }
             nonce += num;

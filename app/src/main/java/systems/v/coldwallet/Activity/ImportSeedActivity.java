@@ -21,10 +21,17 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.journeyapps.barcodescanner.Util;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import systems.v.coldwallet.R;
+import systems.v.coldwallet.Util.JsonUtil;
 import systems.v.coldwallet.Util.QRCodeUtil;
 import systems.v.coldwallet.Util.UIUtil;
+import systems.v.coldwallet.Wallet.Account;
+import systems.v.coldwallet.Wallet.Transaction;
 import systems.v.coldwallet.Wallet.Wallet;
 
 public class ImportSeedActivity extends AppCompatActivity {
@@ -106,16 +113,29 @@ public class ImportSeedActivity extends AppCompatActivity {
                 case 0:
                     Toast.makeText(activity, "Cancelled", Toast.LENGTH_LONG).show();
                     break;
-
                 case 2:
-                    String seed = QRCodeUtil.parseSeed(qrContents);
-                    if (Wallet.validateSeedPhrase(activity, seed)) {
+                    HashMap<String,Object> seedmap = new HashMap<>();
+                    seedmap = JsonUtil.getJsonAsMap(qrContents);
+                    Object seedObject = seedmap.get("seed");
+                    String seed = seedObject.toString();
+
+                    String seedmapProtocol = (String)seedmap.get("protocol");
+
+                    byte seedmapApi = Double.valueOf((double)seedmap.get("api")).byteValue();
+
+                    if(Wallet.PROTOCOL.equals(seedmapProtocol) && seedmapApi == Wallet.API_VERSION) {
+                        if (Wallet.validateSeedPhrase(activity, seed)) {
                         Intent intent = new Intent(activity, SetPasswordActivity.class);
                         intent.putExtra("SEED", seed);
                         startActivity(intent);
+                        }
+                        else {
+                        UIUtil.createForeignSeedDialog(activity, seed);
+
+                        }
                     }
                     else {
-                        UIUtil.createForeignSeedDialog(activity, seed);
+                        Toast.makeText(activity, "Incorrect QR code format or too old version", Toast.LENGTH_LONG).show();
                     }
                     break;
 
