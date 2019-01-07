@@ -30,7 +30,7 @@ public class Wallet {
 
     private static final String TAG = "Winston";
     private static final String WALLET_SPECIFICATION = "1.0";
-    private static final String AGENT_VERSION = "0.1.0";
+    private static final String AGENT_VERSION = "0.1.1";
     private static final String AGENT_NAME = "V Cold Wallet Android";
 
     public static final String[] SEED_WORDS = {

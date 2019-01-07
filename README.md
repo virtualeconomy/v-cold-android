@@ -1,14 +1,11 @@
 [![API](https://img.shields.io/badge/API-24%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=24)
 [![License](http://img.shields.io/badge/License-Apache%202.0-brightgreen.svg?style=flat)](https://opensource.org/licenses/Apache-2.0)
-# VSYS Android Client: Cold Wallet 
+# V Cold Wallet: Android App
 ## Current release:
-- 0.1.0
+- 0.1.1
 
-## Release notes for 0.1.0: 
-- Misc bug fixes related to UI
-- Compatibility fixes for more screen sizes
-- Fix support for Android 6.0
-- Single apk for both mainnet and testnet
+## Release notes for 0.1.1:
+- Conform to V Systems Wallet QR Code API version 1
 
 ## Main Features:
 - Securely store your private keys on an offline mobile device 
