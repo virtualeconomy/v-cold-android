@@ -25,6 +25,9 @@ public class Wallet {
     private String agent;
     private byte chainId;
 
+    public static final String PROTOCOL = "v.systems";
+    public static final int API_VERSION = 1;
+
     private static final String TAG = "Winston";
     private static final String WALLET_SPECIFICATION = "1.0";
     private static final String AGENT_VERSION = "0.1.0";
@@ -261,7 +264,6 @@ public class Wallet {
         if (seed != null && num > 0) {
             for(long i = 0; i < num; i++) {
                 accountSeed = generateAccountSeed(seed, i);
-                //accountSeed = generateAccountSeedOld(seed, i);
                 newAccountSeeds.add(accountSeed);
             }
             return new Wallet(chainId, seed, newAccountSeeds, num);
@@ -276,7 +278,6 @@ public class Wallet {
         if (num > 0) {
             for (long i = nonce; i < nonce + num; i++) {
                 accountSeed = generateAccountSeed(seed, i);
-                //accountSeed = generateAccountSeedOld(seed, i);
                 accountSeeds.add(accountSeed);
             }
             nonce += num;

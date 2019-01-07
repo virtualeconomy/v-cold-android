@@ -27,6 +27,7 @@ import systems.v.coldwallet.Util.HashUtil;
 @JsonDeserialize(using = Transaction.Deserializer.class)
 public class Transaction {
     public static final String TAG = "Winston";
+    public static final String OP_CODE = "transaction";
 
     private final static Charset UTF8 = Charset.forName("UTF-8");
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -185,31 +186,15 @@ public class Transaction {
     public String getJson() {
         HashMap<String, Object> toJson = new HashMap<>();
 
+        toJson.put("protocol", Wallet.PROTOCOL);
+        toJson.put("api", Wallet.API_VERSION);
+        toJson.put("opc", OP_CODE);
+
         if (proofs.size() == 1) {
             // assume proof0 is a signature
             toJson.put("signature", proofs.get(0));
         }
 
-        try {
-            return new ObjectMapper().writeValueAsString(toJson);
-        } catch (JsonProcessingException e) {
-            // not expected to ever happen
-            return null;
-        }
-    }
-
-    /**
-     * Returns JSON-encoded transaction data.
-     * @return a JSON string
-     */
-    public String getFullJson() {
-        HashMap<String, Object> toJson = new HashMap<String, Object>(data);
-        toJson.put("id", id);
-        toJson.put("proofs", proofs);
-        if (proofs.size() == 1) {
-            // assume proof0 is a signature
-            toJson.put("signature", proofs.get(0));
-        }
         try {
             return new ObjectMapper().writeValueAsString(toJson);
         } catch (JsonProcessingException e) {

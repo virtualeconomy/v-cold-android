@@ -81,14 +81,18 @@ public class JsonUtil {
 
     @NonNull
     public static void checkPaymentTx(Activity activity, HashMap<String, Object> jsonMap,
-                                       ArrayList<Account> accounts) {
-        String senderPublicKey, recipient, attachment, assetId, feeAssetId;
+                                      ArrayList<Account> accounts) {
+        String senderPublicKey, recipient, attachment, op_code, protocol;
+        int api_version;
         long amount, fee, timestamp;
         short feeScale;
         String[] keys = {"senderPublicKey", "recipient", "amount", "fee", "feeScale", "timestamp"};
         Account senderAcc = null;
 
         if (JsonUtil.containsKeys(jsonMap, keys)){
+            protocol = (String) jsonMap.get("protocol");
+            api_version = Double.valueOf((double)jsonMap.get("api")).intValue();
+            op_code = (String) jsonMap.get("opc");
             senderPublicKey = (String) jsonMap.get("senderPublicKey");
             recipient = (String) jsonMap.get("recipient");
             amount = Double.valueOf((double)jsonMap.get("amount")).longValue();
@@ -109,6 +113,9 @@ public class JsonUtil {
                 Wallet wallet = ((ColdWalletActivity) activity).getWallet();
                 String walletStr = gson.toJson(wallet);
                 Intent intent = new Intent(activity, ConfirmTxActivity.class);
+                intent.putExtra("PROTOCOL", protocol);
+                intent.putExtra("API", api_version);
+                intent.putExtra("OPC", op_code);
                 intent.putExtra("ACTION", "PAYMENT");
                 intent.putExtra("WALLET", walletStr);
                 intent.putExtra("SENDER", gson.toJson(senderAcc));
@@ -136,14 +143,19 @@ public class JsonUtil {
 
     @NonNull
     public static void checkLeaseTx(Activity activity, HashMap<String, Object> jsonMap,
-                                       ArrayList<Account> accounts) {
-        String senderPublicKey, recipient;
+                                    ArrayList<Account> accounts) {
+        String senderPublicKey, recipient, op_code, protocol;
+        int api_version;
         long amount, fee, timestamp;
         short feeScale;
         String[] keys = {"senderPublicKey", "recipient", "amount", "fee", "feeScale", "timestamp"};
         Account senderAcc = null;
 
         if (JsonUtil.containsKeys(jsonMap, keys)){
+            protocol = (String) jsonMap.get("protocol");
+            api_version = Double.valueOf((double)jsonMap.get("api")).intValue();
+            op_code = (String) jsonMap.get("opc");
+
             senderPublicKey = (String) jsonMap.get("senderPublicKey");
             recipient = (String) jsonMap.get("recipient");
             amount = Double.valueOf((double)jsonMap.get("amount")).longValue();
@@ -163,6 +175,9 @@ public class JsonUtil {
                 Wallet wallet = ((ColdWalletActivity) activity).getWallet();
                 String walletStr = gson.toJson(wallet);
                 Intent intent = new Intent(activity, ConfirmTxActivity.class);
+                intent.putExtra("PROTOCOL", protocol);
+                intent.putExtra("API", api_version);
+                intent.putExtra("OPC", op_code);
                 intent.putExtra("ACTION", "LEASE");
                 intent.putExtra("WALLET", walletStr);
                 intent.putExtra("SENDER", gson.toJson(senderAcc));
@@ -189,14 +204,19 @@ public class JsonUtil {
 
     @NonNull
     public static void checkCancelLeaseTx(Activity activity, HashMap<String, Object> jsonMap,
-                                       ArrayList<Account> accounts) {
-        String senderPublicKey, txId;
+                                          ArrayList<Account> accounts) {
+        String senderPublicKey, txId, op_code, protocol;
+        int api_version;
         long fee, timestamp;
         short feeScale;
         String[] keys = {"senderPublicKey", "txId", "fee", "feeScale", "timestamp"};
         Account senderAcc = null;
 
         if (JsonUtil.containsKeys(jsonMap, keys)){
+            protocol = (String) jsonMap.get("protocol");
+            api_version = Double.valueOf((double)jsonMap.get("api")).intValue();
+            op_code = (String) jsonMap.get("opc");
+
             senderPublicKey = (String) jsonMap.get("senderPublicKey");
             txId = (String) jsonMap.get("txId");
             fee = Double.valueOf((double)jsonMap.get("fee")).longValue();
@@ -215,6 +235,9 @@ public class JsonUtil {
                 Wallet wallet = ((ColdWalletActivity) activity).getWallet();
                 String walletStr = gson.toJson(wallet);
                 Intent intent = new Intent(activity, ConfirmTxActivity.class);
+                intent.putExtra("PROTOCOL", protocol);
+                intent.putExtra("API", api_version);
+                intent.putExtra("OPC", op_code);
                 intent.putExtra("ACTION", "CANCEL_LEASE");
                 intent.putExtra("WALLET", walletStr);
                 intent.putExtra("SENDER", gson.toJson(senderAcc));
