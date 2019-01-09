@@ -188,7 +188,7 @@ public class Transaction {
 
         toJson.put("protocol", Wallet.PROTOCOL);
         toJson.put("api", Wallet.API_VERSION);
-        toJson.put("opc", OP_CODE);
+        toJson.put("opc", "signature");
 
         if (proofs.size() == 1) {
             // assume proof0 is a signature
