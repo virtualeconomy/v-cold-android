@@ -17,10 +17,6 @@ import systems.v.coldwallet.Wallet.Wallet;
 
 public class QRCodeUtil {
     private static final String TAG = "Winston";
-    //private static final String DOMAIN = "https://v.systems";
-    private static final String DOMAIN = "http://localhost:8080";
-
-    public static final String OP_CODE = "transaction";
 
     public static Bitmap generateQRCode(String message, int width) {
         Bitmap qrCode;
@@ -83,23 +79,10 @@ public class QRCodeUtil {
         return generateQRCode(message, width);
     }
 
-    public static String parseSeed(String message) {
-        if(message.contains("/#cold/export?seed=")) {
-            String[] tokens = message.split("=");
-            return tokens[1];
-        }
-        else {
-            return "";
-        }
-    }
-
     public static int processQrContents(String qrContents) {
-        HashMap<String,Object> map = new HashMap<>();
-        String priKey;
-
         if (qrContents == null) return 0;
 
-        map = JsonUtil.getJsonAsMap(qrContents);
+        HashMap<String,Object>  map = JsonUtil.getJsonAsMap(qrContents);
         if (map != null) {
             String mapOpc = (String )map.get("opc");
             if (mapOpc!=null && mapOpc.equals("seed"))

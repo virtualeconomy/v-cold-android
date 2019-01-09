@@ -198,15 +198,14 @@ public class ColdWalletActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case PermissionUtil.PERMISSION_REQUEST_CODE:
-                if (!PermissionUtil.permissionGranted(this)) {
-                    Toast.makeText(activity, "Please grant all permissions", Toast.LENGTH_LONG).show();
-                    finish();
-                }
-                else {
-                    UIUtil.createFirstRunWarningDialog(activity);
-                }
+        if (requestCode == PermissionUtil.PERMISSION_REQUEST_CODE) {
+            if (!PermissionUtil.permissionGranted(this)) {
+                Toast.makeText(activity, "Please grant all permissions", Toast.LENGTH_LONG).show();
+                finish();
+            }
+            else {
+                UIUtil.createFirstRunWarningDialog(activity);
+            }
         }
     }
 
