@@ -46,7 +46,7 @@
     <string name="sign_tx">Sign Transaction</string>
 
     <!-- Strings related to About us -->
-    <string name="copyright">Copyright (c) 2018-2019 Virtual Economy Technology Limited</string>
+    <string name="copyright">Copyright (c) 2018-2019 V SYSTEMS LIMITED</string>
     <string name="version_main">V Cold Wallet version 0.1.1</string>
     <string name="version_test">V Cold Wallet version 0.1.1(for Testnet)</string>
     <string name="description">V Cold Wallet is a reference implementation of
