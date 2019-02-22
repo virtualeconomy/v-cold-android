@@ -51,10 +51,16 @@ public class ConfirmTxActivity extends AppCompatActivity {
             return;
         }
         int api_version = intent.getIntExtra("API", 0);
-        if (Wallet.API_VERSION != api_version) {
+        if (api_version <= 0) {
+            String msg = "Invalid QRCode: api";
+            Toast.makeText(activity, msg, Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+        if (Wallet.API_VERSION < api_version) {
             String msg = String.format(
                     Locale.ENGLISH,
-                    "Wrong API version: %d. Expected version: %d",
+                    "Unsupported QRCode: api=%d>%d.",
                     api_version,
                     Wallet.API_VERSION);
             Toast.makeText(activity, msg, Toast.LENGTH_LONG).show();
