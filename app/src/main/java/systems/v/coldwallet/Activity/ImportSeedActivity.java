@@ -123,7 +123,7 @@ public class ImportSeedActivity extends AppCompatActivity {
 
                     byte seedmapApi = Double.valueOf((double)seedmap.get("api")).byteValue();
 
-                    if(Wallet.PROTOCOL.equals(seedmapProtocol) && seedmapApi == Wallet.API_VERSION) {
+                    if(Wallet.PROTOCOL.equals(seedmapProtocol) && seedmapApi <= Wallet.API_VERSION) {
                         if (Wallet.validateSeedPhrase(activity, seed)) {
                         Intent intent = new Intent(activity, SetPasswordActivity.class);
                         intent.putExtra("SEED", seed);
