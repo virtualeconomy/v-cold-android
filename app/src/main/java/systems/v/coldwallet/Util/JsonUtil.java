@@ -7,12 +7,16 @@ import android.util.Log;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import com.google.gson.LongSerializationPolicy;
+
+import org.json.JSONObject;
 
 import systems.v.coldwallet.Activity.ColdWalletActivity;
 import systems.v.coldwallet.Activity.ConfirmTxActivity;
@@ -37,7 +41,7 @@ public class JsonUtil {
             attachment = (String) jsonMap.get("attachment");
             assetId = (String) jsonMap.get("assetId");
             feeAssetId = (String) jsonMap.get("feeAssetId");
-            amount = Double.valueOf((double)jsonMap.get("amount")).longValue();
+            amount = Long.valueOf((String) jsonMap.get("amount")).longValue();
             fee = Double.valueOf((double)jsonMap.get("fee")).longValue();
             timestamp = Double.valueOf((double)jsonMap.get("timestamp")).longValue();
 
@@ -95,12 +99,11 @@ public class JsonUtil {
             op_code = (String) jsonMap.get("opc");
             senderPublicKey = (String) jsonMap.get("senderPublicKey");
             recipient = (String) jsonMap.get("recipient");
-            amount = Double.valueOf((double)jsonMap.get("amount")).longValue();
+            amount = Long.valueOf((String)jsonMap.get("amount")).longValue();
             attachment = (String) jsonMap.get("attachment");
             fee = Double.valueOf((double)jsonMap.get("fee")).longValue();
             feeScale = Double.valueOf((double)jsonMap.get("feeScale")).shortValue();
             timestamp = Double.valueOf((double)jsonMap.get("timestamp")).longValue();
-
             for(Account account:accounts){
                 if(account.isAccount(senderPublicKey)){
                     Log.d(TAG, "Private key: " + account.getPriKey());
@@ -158,7 +161,7 @@ public class JsonUtil {
 
             senderPublicKey = (String) jsonMap.get("senderPublicKey");
             recipient = (String) jsonMap.get("recipient");
-            amount = Double.valueOf((double)jsonMap.get("amount")).longValue();
+            amount = Long.valueOf((String)jsonMap.get("amount")).longValue();
             fee = Double.valueOf((double)jsonMap.get("fee")).longValue();
             feeScale = Double.valueOf((double)jsonMap.get("feeScale")).shortValue();
             timestamp = Double.valueOf((double)jsonMap.get("timestamp")).longValue();
@@ -264,7 +267,9 @@ public class JsonUtil {
     public static HashMap<String,Object> getJsonAsMap(String str){
         if (isJsonString(str)){
             try{
-                HashMap<String,Object> gson = new Gson().fromJson(str, new TypeToken<HashMap<String, Object>>(){}.getType());
+                Gson gsonBuilder = new GsonBuilder().setLongSerializationPolicy(LongSerializationPolicy.STRING).create();
+                str = str.replaceAll("\"amount\":(\\d+)", "\"amount\":\"$1\"");
+                HashMap<String,Object> gson =  gsonBuilder.fromJson(str, new TypeToken<HashMap<String, Object>>(){}.getType());
                 Log.d(TAG, gson.toString());
                 return gson;
             }
