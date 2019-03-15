@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -231,7 +232,6 @@ public class ColdWalletActivity extends AppCompatActivity {
                 case 1:
                     HashMap<String, Object> jsonMap = JsonUtil.getJsonAsMap(qrContents);
                     //Toast.makeText(activity, jsonMap.toString(), Toast.LENGTH_LONG).show();
-
                     byte txType = -1;
                     Transaction transaction = null;
 
