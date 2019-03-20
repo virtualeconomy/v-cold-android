@@ -232,9 +232,7 @@ public class ColdWalletActivity extends AppCompatActivity {
 
                 case 1:
                     HashMap<String, Object> jsonMap = JsonUtil.getJsonAsMap(qrContents);
-                    //Toast.makeText(activity, jsonMap.toString(), Toast.LENGTH_LONG).show();
                     byte txType = -1;
-                    Transaction transaction = null;
 
                     if (jsonMap.containsKey("api")) {
                         byte api = Double.valueOf((double)jsonMap.get("api")).byteValue();
@@ -267,16 +265,20 @@ public class ColdWalletActivity extends AppCompatActivity {
                     break;
 
                 default:
-                    Gson gson = new Gson();
-                    HashMap<String,Object> gsonMap =  gson.fromJson(qrContents, new TypeToken<HashMap<String, Object>>(){}.getType());
-                    if (gsonMap.containsKey("api")) {
-                        byte api = Double.valueOf((double)gsonMap.get("api")).byteValue();
-                        if (api > Wallet.API_VERSION) {
-                            UIUtil.createUpdateAppDialog(activity);
-                            break;
+                    try {
+                        Gson gson = new Gson();
+                        HashMap<String,Object> gsonMap =  gson.fromJson(qrContents, new TypeToken<HashMap<String, Object>>(){}.getType());
+                        if (gsonMap.containsKey("api")) {
+                            byte api = Double.valueOf((double) gsonMap.get("api")).byteValue();
+                            if (api > Wallet.API_VERSION) {
+                                UIUtil.createUpdateAppDialog(activity);
+                                break;
+                            }
+                        } else {
+                            Toast.makeText(activity, "Incorrect transaction format", Toast.LENGTH_LONG).show();
                         }
-                    } else {
-                        Toast.makeText(activity, "Incorrect transaction format", Toast.LENGTH_LONG).show();
+                    } catch(Exception e){
+                        Toast.makeText(activity, "Invalid QrCode", Toast.LENGTH_LONG).show();
                     }
                     //UIUtil.createWrongTransactionDialog(activity);
 
