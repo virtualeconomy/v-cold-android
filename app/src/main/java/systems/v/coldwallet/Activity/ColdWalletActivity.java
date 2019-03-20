@@ -253,7 +253,13 @@ public class ColdWalletActivity extends AppCompatActivity {
                     }
 
                     if (txType != 2 && txType != 3 && txType != 4) {
-                        Toast.makeText(activity, "Incorrect transaction format", Toast.LENGTH_LONG).show();
+                        byte api = Double.valueOf((double)jsonMap.get("api")).byteValue();
+                        if (api > Wallet.API_VERSION) {
+                            UIUtil.createUpdateAppDialog(activity);
+                            break;
+                        } else {
+                            Toast.makeText(activity, "Incorrect transaction format", Toast.LENGTH_LONG).show();
+                        }
                     }
 
                     switch (txType) {
