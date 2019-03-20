@@ -21,8 +21,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-
 import com.google.gson.Gson;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -253,13 +254,7 @@ public class ColdWalletActivity extends AppCompatActivity {
                     }
 
                     if (txType != 2 && txType != 3 && txType != 4) {
-                        byte api = Double.valueOf((double)jsonMap.get("api")).byteValue();
-                        if (api > Wallet.API_VERSION) {
-                            UIUtil.createUpdateAppDialog(activity);
-                            break;
-                        } else {
-                            Toast.makeText(activity, "Incorrect transaction format", Toast.LENGTH_LONG).show();
-                        }
+                        Toast.makeText(activity, "Incorrect transaction format", Toast.LENGTH_LONG).show();
                     }
 
                     switch (txType) {
@@ -272,8 +267,19 @@ public class ColdWalletActivity extends AppCompatActivity {
                     break;
 
                 default:
+                    Gson gson = new Gson();
+                    HashMap<String,Object> gsonMap =  gson.fromJson(qrContents, new TypeToken<HashMap<String, Object>>(){}.getType());
+                    if (gsonMap.containsKey("api")) {
+                        byte api = Double.valueOf((double)gsonMap.get("api")).byteValue();
+                        if (api > Wallet.API_VERSION) {
+                            UIUtil.createUpdateAppDialog(activity);
+                            break;
+                        }
+                    } else {
+                        Toast.makeText(activity, "Incorrect transaction format", Toast.LENGTH_LONG).show();
+                    }
                     //UIUtil.createWrongTransactionDialog(activity);
-                    Toast.makeText(activity, "Incorrect transaction format", Toast.LENGTH_LONG).show();
+
             }
         }
         else {
