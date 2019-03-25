@@ -27,6 +27,10 @@ public class Wallet {
 
     public static final String PROTOCOL = "v.systems";
     public static final int API_VERSION = 2;
+    public static final int SEED_API_VERSION =1;
+    public static final int TX_API_VERSION =1;
+    public static final int ADDRESS_API_VERSION =1;
+
 
     private static final String TAG = "Winston";
     private static final String WALLET_SPECIFICATION = "1.0";
