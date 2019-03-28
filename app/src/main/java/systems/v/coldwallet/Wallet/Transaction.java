@@ -187,7 +187,7 @@ public class Transaction {
         HashMap<String, Object> toJson = new HashMap<>();
 
         toJson.put("protocol", Wallet.PROTOCOL);
-        toJson.put("api", Wallet.API_VERSION);
+        toJson.put("api", Wallet.TX_API_VERSION);
         toJson.put("opc", "signature");
 
         if (proofs.size() == 1) {

@@ -35,7 +35,7 @@ public class QRCodeUtil {
         HashMap<String, Object> accountJson = new HashMap<>();
 
         accountJson.put("protocol", Wallet.PROTOCOL);
-        accountJson.put("api", Wallet.API_VERSION);
+        accountJson.put("api", Wallet.ADDRESS_API_VERSION);
         accountJson.put("opc", accountOpc);
         accountJson.put("address",account.getAddress());
         accountJson.put("publicKey",account.getPubKey());
@@ -53,7 +53,7 @@ public class QRCodeUtil {
         HashMap<String,Object>seedJson = new HashMap<>();
 
         seedJson.put("protocol",Wallet.PROTOCOL);
-        seedJson.put("api",Wallet.API_VERSION);
+        seedJson.put("api",Wallet.SEED_API_VERSION);
         seedJson.put("opc",seedOpc);
         seedJson.put("seed",wallet.getSeed());
 
