@@ -1,11 +1,6 @@
 [![API](https://img.shields.io/badge/API-24%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=24)
 [![License](http://img.shields.io/badge/License-Apache%202.0-brightgreen.svg?style=flat)](https://opensource.org/licenses/Apache-2.0)
 # V Cold Wallet: Android App
-## Current release:
-- 0.1.1
-
-## Release notes for 0.1.1:
-- Conform to V Systems Wallet QR Code API version 1
 
 ## Main Features:
 - Securely store your private keys on an offline mobile device 
@@ -30,4 +25,4 @@
 ## Download Link:	
 Scan below using mobile device	
 
- ![Download Link](https://github.com/virtualeconomy/v-cold-android/raw/master/v-cold-android-0.1.1.png)
+ ![Download Link](https://github.com/virtualeconomy/v-cold-android/raw/master/v-cold-android-0.1.2.png)
