@@ -25,4 +25,4 @@
 ## Download Link:	
 Scan below using mobile device	
 
- ![Download Link](https://github.com/virtualeconomy/v-cold-android/raw/master/v-cold-android-0.1.2.png)
+ ![Download Link](https://github.com/virtualeconomy/v-cold-android/raw/master/v-cold-wallet-googleplay-download.png)
