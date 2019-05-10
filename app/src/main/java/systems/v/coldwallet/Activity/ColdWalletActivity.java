@@ -222,7 +222,10 @@ public class ColdWalletActivity extends AppCompatActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         qrContents = result.getContents();
         int val = QRCodeUtil.processQrContents(qrContents);
-        if (wallet != null && (val != 1 && val != 0 )) { val = 4; }
+        if (wallet != null && (val != 1 && val != 0 && val !=6))
+        {
+            val = 4;
+        }
 
         if(result != null) {
             switch (val) {
@@ -262,6 +265,20 @@ public class ColdWalletActivity extends AppCompatActivity {
                                 break;
                         case 4: JsonUtil.checkCancelLeaseTx(activity, jsonMap, accounts);
                     }
+                    break;
+
+                case 6:
+                    HashMap<String, Object> execJsonMap = JsonUtil.getJsonAsMap(qrContents);
+                    if (execJsonMap.containsKey("api")) {
+                        byte api = Double.valueOf((double)execJsonMap.get("api")).byteValue();
+                        if (api > Wallet.API_VERSION) {
+                            UIUtil.createUpdateAppDialog(activity);
+                            break;
+                        }
+                    }
+
+                    JsonUtil.checkExecContractTx(activity, execJsonMap, accounts);
+
                     break;
 
                 default:

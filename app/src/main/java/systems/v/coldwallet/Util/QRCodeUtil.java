@@ -88,6 +88,10 @@ public class QRCodeUtil {
             {
                 return 2;
             }
+            else if (mapOpc!=null && mapOpc.equals("function"))
+            {
+                return 6;
+            }
             else return 1;
         }
         else return 3;

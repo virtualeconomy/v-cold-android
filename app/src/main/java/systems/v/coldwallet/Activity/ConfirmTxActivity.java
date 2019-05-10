@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.util.Locale;
+import android.util.Log;
 
 import systems.v.coldwallet.R;
 import systems.v.coldwallet.Util.UIUtil;
@@ -26,9 +27,9 @@ public class ConfirmTxActivity extends AppCompatActivity {
     private ConfirmTxActivity activity;
 
     private Account sender;
-    private String recipient,assetId, feeAssetId, txId, attachment, walletStr;
+    private String recipient,assetId, feeAssetId, txId, attachment, walletStr,function,functionTextual,contractId;
     private long timestamp, amount, fee;
-    private short feeScale;
+    private short feeScale,functionId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,8 @@ public class ConfirmTxActivity extends AppCompatActivity {
             return;
         }
         String op_code = intent.getStringExtra("OPC");
-        if (!Transaction.OP_CODE.equals(op_code)) {
+        if (!Transaction.OP_CODE.equals(op_code) && !Transaction.FUN_OP_CODE.equals(op_code) ) {
+            Log.d(TAG,"confirm error");
             Toast.makeText(activity, "Wrong QRCode is used. This is not transaction", Toast.LENGTH_LONG).show();
             finish();
             return;
@@ -129,6 +131,28 @@ public class ConfirmTxActivity extends AppCompatActivity {
                 timestamp =intent.getLongExtra("TIMESTAMP", 0);
 
                 UIUtil.setCancelLeaseTx(activity, sender, txId, fee, feeScale, timestamp);
+                break;
+
+            case "EXEC_CONTRACT":
+
+                Log.d(TAG,"in this function");
+
+                senderStr = intent.getStringExtra("SENDER");
+
+                sender = gson.fromJson(senderStr, Account.class);
+                fee = intent.getLongExtra("FEE", 0);
+                feeScale = intent.getShortExtra("FEESCALE", Short.valueOf("100"));
+                timestamp =intent.getLongExtra("TIMESTAMP", 0);
+                attachment = intent.getStringExtra("ATTACHMENT");
+                function = intent.getStringExtra("FUNCTION");
+                functionTextual = intent.getStringExtra("FUNCTIONTEXTUAL");
+                contractId = intent.getStringExtra("CONTRACTID");
+                functionId = intent.getShortExtra("FUNCTIONID", Short.valueOf("3"));
+
+                Log.d(TAG,"in that function" + attachment);
+
+                UIUtil.setExecContractTx(activity, sender, function,contractId,attachment,functionTextual, fee, feeScale, timestamp,functionId);
+                break;
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.custom_toolbar);
