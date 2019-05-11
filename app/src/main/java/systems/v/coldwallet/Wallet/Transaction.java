@@ -191,7 +191,10 @@ public class Transaction {
         buf.putShort(functionLen);
         buf.put(functionArr);
 
-        buf.put(attachmentBytes);
+        byte[] attachmentArr = Base58.decode(attachment);
+        short attachmentLen = (short)attachmentArr.length;
+        buf.putShort(attachmentLen);
+        buf.put(attachmentArr);
         buf.putLong(fee);
         buf.putShort(feeScale);
         putBigInteger(buf, timestamp);
