@@ -24,6 +24,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.TimeZone;
+import android.util.Log;
 
 import biz.kasual.materialnumberpicker.MaterialNumberPicker;
 import systems.v.coldwallet.Activity.ColdWalletActivity;
@@ -380,6 +381,60 @@ public class UIUtil {
             @Override
             public void onClick(View v) {
                 Transaction transaction = Transaction.makeLeaseCancelTx(sender, txId, fee, feeScale, timeBigInteger);
+                createSignatureDialog(activity, transaction);
+            }
+        });
+    }
+
+    public static void setExecContractTx(final Activity activity, final Account sender,
+                                         final String function, final String contractId, final String attachment, final String finalTextual, final long fee, final short feeScale, final long timestamp, final short functionId) {
+        activity.setContentView(R.layout.custom_layout_exec_contranct_tx);
+
+
+        final TextView senderTx = (TextView) activity.findViewById(R.id.transaction_sender);
+        TextView contractIdTx = (TextView) activity.findViewById(R.id.contract_id);
+        TextView functionIdTx = (TextView) activity.findViewById(R.id.function_id);
+        TextView attachmentTx = (TextView) activity.findViewById(R.id.transaction_attachment);
+        TextView textualTx = (TextView) activity.findViewById(R.id.function_textual);
+        TextView timestampTx = (TextView) activity.findViewById(R.id.transaction_timestamp);
+        TextView feeTx = (TextView)activity.findViewById(R.id.transaction_fee);
+        Button confirm = (Button) activity.findViewById(R.id.transaction_confirm);
+
+        senderTx.setText(sender.getMutatedAddress());
+        feeTx.setText(String.valueOf(convert(fee)));
+
+        String time = new SimpleDateFormat("yyyy-MM-dd  HH:MM:SS")
+                .format(new Timestamp(timestamp));
+        timestampTx.setText(time + "\n" + TimeZone.getDefault().getDisplayName());
+
+        functionIdTx.setText(String.valueOf(functionId));
+
+        attachmentTx.setText(attachment);
+        contractIdTx.setText(contractId);
+        textualTx.setText(finalTextual);
+
+        final BigInteger timeBigInteger = BigInteger.valueOf(timestamp)
+                .multiply(BigInteger.valueOf(1000000L));
+
+        senderTx.setTag("MUTATED");
+        senderTx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (senderTx.getTag().equals("MUTATED")) {
+                    senderTx.setText(sender.getAddress());
+                    senderTx.setTag("COMPLETE");
+                }
+                else {
+                    senderTx.setText(sender.getMutatedAddress());
+                    senderTx.setTag("MUTATED");
+                }
+            }
+        });
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Transaction transaction = Transaction.makeExecContractTx(sender,contractId, function,attachment,fee,feeScale,timeBigInteger,functionId );
                 createSignatureDialog(activity, transaction);
             }
         });

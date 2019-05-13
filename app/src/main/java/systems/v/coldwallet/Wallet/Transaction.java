@@ -1,6 +1,7 @@
 package systems.v.coldwallet.Wallet;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,6 +29,7 @@ import systems.v.coldwallet.Util.HashUtil;
 public class Transaction {
     public static final String TAG = "Winston";
     public static final String OP_CODE = "transaction";
+    public static final String FUN_OP_CODE = "function";
 
     private final static Charset UTF8 = Charset.forName("UTF-8");
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -42,6 +44,7 @@ public class Transaction {
     private static final byte TRANSFER = 12;
     private static final byte LEASE = 3;
     private static final byte LEASE_CANCEL = 4;
+    private static final byte EXEC_CONTRACT = 9;
 
     /** Transaction ID. */
     public final String id;
@@ -91,6 +94,7 @@ public class Transaction {
         buf.putShort(feeScale);
         recipient = putRecipient(buf, sender.getChainId(), recipient);
         putString(buf, attachment);
+        printByteBufToHex(buf);
 
         return new Transaction(sender, buf,"/transactions/broadcast",
                 "type", PAYMENT,
@@ -117,6 +121,7 @@ public class Transaction {
         buf.putLong(amount).putLong(fee);
         recipient = putRecipient(buf, sender.getChainId(), recipient);
         putString(buf, attachment);
+        printByteBufToHex(buf);
 
         return new Transaction(sender, buf,"/transactions/broadcast",
                 "type", TRANSFER,
@@ -139,6 +144,7 @@ public class Transaction {
         buf.putLong(amount).putLong(fee);
         buf.putShort(feeScale);
         putBigInteger(buf, timestamp);
+        printByteBufToHex(buf);
         return new Transaction(sender, buf,"/transactions/broadcast",
                 "type", LEASE,
                 "version", V2,
@@ -157,6 +163,7 @@ public class Transaction {
         buf.putShort(feeScale);
         putBigInteger(buf, timestamp);
         buf.put(Base58.decode(txId));
+        printByteBufToHex(buf);
         return new Transaction(sender, buf,"/transactions/broadcast",
                 "type", LEASE_CANCEL,
                 "version", V2,
@@ -165,6 +172,49 @@ public class Transaction {
                 "fee", fee,
                 "feeScale", feeScale,
                 "timestamp", timestamp);
+    }
+
+    @NonNull
+    public static Transaction makeExecContractTx(Account sender, String contractId, String function, String attachment,
+                                             long fee, short feeScale,  BigInteger timestamp, short functionId)
+    {
+        byte[] attachmentBytes = (attachment == null ? "" : attachment).getBytes();
+        Log.d(TAG, attachment);
+        ByteBuffer buf = ByteBuffer.allocate(KBYTE);
+        buf.put(EXEC_CONTRACT);
+
+
+        byte[] contractArr = Base58.decode(contractId);
+        buf.put(contractArr);
+
+        buf.putShort(functionId);
+
+        byte[] functionArr = Base58.decode(function);
+        short functionLen = (short)functionArr.length;
+        buf.putShort(functionLen);
+        buf.put(functionArr);
+
+        byte[] attachmentArr = Base58.decode(attachment);
+        short attachmentLen = (short)attachmentArr.length;
+        buf.putShort(attachmentLen);
+        buf.put(attachmentArr);
+        buf.putLong(fee);
+        buf.putShort(feeScale);
+        putBigInteger(buf, timestamp);
+
+        printByteBufToHex(buf);
+
+        return new Transaction(sender, buf,"/transactions/broadcast",
+                "type", EXEC_CONTRACT,
+                "version", V2,
+                "senderPublicKey", sender.getPubKey(),
+                "contractId", contractId,
+                "function", function,
+                "fee", fee,
+                "feeScale",feeScale,
+                "functionId",functionId,
+                "timestamp", timestamp,
+                "attachment", Base58.encode(attachmentBytes));
     }
 
     static class Deserializer extends JsonDeserializer<Transaction> {
@@ -239,6 +289,18 @@ public class Transaction {
 
     private static void putBytes(ByteBuffer buffer, byte[] bytes) {
         buffer.putShort((short) bytes.length).put(bytes);
+    }
+
+    private static void printByteBufToHex(ByteBuffer buffer) {
+        byte[] arr = toBytes(buffer);
+        StringBuilder bufString = new StringBuilder();
+
+        for(byte b:arr) {
+            bufString.append(String.format("%02X ", b));
+        }
+
+        Log.d(TAG,"byte array" + bufString);
+
     }
 
     private static String putRecipient(ByteBuffer buffer, byte chainId, String recipient) {
