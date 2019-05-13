@@ -255,8 +255,6 @@ public class Transaction {
 
     @NonNull
     private String sign(Account account, byte[] bytes){
-        Log.d(TAG, account.getPriKey());
-        Log.d(TAG,Base58.encode(bytes));
         return Base58.encode(cipher.calculateSignature(Base58.decode(account.getPriKey()), bytes));
     }
     private static byte[] toBytes(ByteBuffer buffer) {
