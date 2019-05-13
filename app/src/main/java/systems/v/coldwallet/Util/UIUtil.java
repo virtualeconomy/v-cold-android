@@ -390,7 +390,7 @@ public class UIUtil {
                                          final String function, final String contractId, final String attachment, final String finalTextual, final long fee, final short feeScale, final long timestamp, final short functionId) {
         activity.setContentView(R.layout.custom_layout_exec_contranct_tx);
 
-        Log.d("winston", "set" + attachment);
+        // Log.d("winston", "set" + attachment);
 
         final TextView senderTx = (TextView) activity.findViewById(R.id.transaction_sender);
         TextView contractIdTx = (TextView) activity.findViewById(R.id.contract_id);

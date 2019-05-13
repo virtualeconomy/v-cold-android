@@ -135,8 +135,6 @@ public class ConfirmTxActivity extends AppCompatActivity {
 
             case "EXEC_CONTRACT":
 
-                Log.d(TAG,"in this function");
-
                 senderStr = intent.getStringExtra("SENDER");
 
                 sender = gson.fromJson(senderStr, Account.class);
@@ -149,7 +147,7 @@ public class ConfirmTxActivity extends AppCompatActivity {
                 contractId = intent.getStringExtra("CONTRACTID");
                 functionId = intent.getShortExtra("FUNCTIONID", Short.valueOf("3"));
 
-                Log.d(TAG,"in that function" + attachment);
+                Log.d(TAG,"in that function" + sender);
 
                 UIUtil.setExecContractTx(activity, sender, function,contractId,attachment,functionTextual, fee, feeScale, timestamp,functionId);
                 break;

@@ -267,11 +267,11 @@ public class JsonUtil {
     @NonNull
     public static void checkExecContractTx(Activity activity, HashMap<String, Object> jsonMap,
                                     ArrayList<Account> accounts) {
-        String senderPublicKey, attachment,contractId,function,functionTextual, op_code, protocol;
+        String address, attachment,contractId,function,functionTextual, op_code, protocol;
         int api_version;
         long  fee, timestamp;
         short feeScale,functionId;
-        String[] keys = {"senderPublicKey","function", "fee", "feeScale", "timestamp"};
+        String[] keys = {"address","function", "fee", "feeScale", "timestamp"};
         Account senderAcc = null;
 
         if (JsonUtil.containsKeys(jsonMap, keys)){
@@ -279,7 +279,8 @@ public class JsonUtil {
             api_version = Double.valueOf((double)jsonMap.get("api")).intValue();
             op_code = (String) jsonMap.get("opc");
 
-            senderPublicKey = (String) jsonMap.get("senderPublicKey");
+            address = (String)jsonMap.get("address");
+            Log.d(TAG, address);
             attachment = (String)jsonMap.get("attachment");
             contractId = (String )jsonMap.get("contractId");
             function = (String )jsonMap.get("function");
@@ -291,8 +292,7 @@ public class JsonUtil {
             timestamp = Double.valueOf((double)jsonMap.get("timestamp")).longValue();
 
             for(Account account:accounts){
-                if(account.isAccount(senderPublicKey)){
-                    Log.d(TAG, "Private key: " + account.getPriKey());
+                if(account.isAccountByAddress(address)){
                     senderAcc = account;
                 }
             }
@@ -316,8 +316,6 @@ public class JsonUtil {
                 intent.putExtra("FUNCTIONID", functionId);
                 intent.putExtra("FUNCTIONTEXTUAL", functionTextual);
                 intent.putExtra("CONTRACTID", contractId);
-
-                Log.d(TAG, "Private key: " + intent);
 
                 activity.startActivity(intent);
             }

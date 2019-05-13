@@ -94,6 +94,7 @@ public class Transaction {
         buf.putShort(feeScale);
         recipient = putRecipient(buf, sender.getChainId(), recipient);
         putString(buf, attachment);
+        printByteBufToHex(buf);
 
         return new Transaction(sender, buf,"/transactions/broadcast",
                 "type", PAYMENT,
@@ -120,7 +121,7 @@ public class Transaction {
         buf.putLong(amount).putLong(fee);
         recipient = putRecipient(buf, sender.getChainId(), recipient);
         putString(buf, attachment);
-
+        printByteBufToHex(buf);
 
         return new Transaction(sender, buf,"/transactions/broadcast",
                 "type", TRANSFER,
@@ -143,6 +144,7 @@ public class Transaction {
         buf.putLong(amount).putLong(fee);
         buf.putShort(feeScale);
         putBigInteger(buf, timestamp);
+        printByteBufToHex(buf);
         return new Transaction(sender, buf,"/transactions/broadcast",
                 "type", LEASE,
                 "version", V2,
@@ -161,6 +163,7 @@ public class Transaction {
         buf.putShort(feeScale);
         putBigInteger(buf, timestamp);
         buf.put(Base58.decode(txId));
+        printByteBufToHex(buf);
         return new Transaction(sender, buf,"/transactions/broadcast",
                 "type", LEASE_CANCEL,
                 "version", V2,
@@ -199,19 +202,7 @@ public class Transaction {
         buf.putShort(feeScale);
         putBigInteger(buf, timestamp);
 
-        byte[] arr = new byte[90];
-        StringBuilder sb = new StringBuilder();
-
-        for(int i=0;i<90;++i) {
-            arr[i] = buf.get(i);
-        }
-        for(byte b:arr) {
-            sb.append(String.format("%02X ", b));
-        }
-
-        Log.d(TAG,"the arr" + arr);
-        Log.d(TAG,"the string" + sb);
-        Log.d(TAG,sb.toString());
+        printByteBufToHex(buf);
 
         return new Transaction(sender, buf,"/transactions/broadcast",
                 "type", EXEC_CONTRACT,
@@ -264,6 +255,8 @@ public class Transaction {
 
     @NonNull
     private String sign(Account account, byte[] bytes){
+        Log.d(TAG, account.getPriKey());
+        Log.d(TAG,Base58.encode(bytes));
         return Base58.encode(cipher.calculateSignature(Base58.decode(account.getPriKey()), bytes));
     }
     private static byte[] toBytes(ByteBuffer buffer) {
@@ -298,6 +291,18 @@ public class Transaction {
 
     private static void putBytes(ByteBuffer buffer, byte[] bytes) {
         buffer.putShort((short) bytes.length).put(bytes);
+    }
+
+    private static void printByteBufToHex(ByteBuffer buffer) {
+        byte[] arr = toBytes(buffer);
+        StringBuilder bufString = new StringBuilder();
+
+        for(byte b:arr) {
+            bufString.append(String.format("%02X ", b));
+        }
+
+        Log.d(TAG,"byte array" + bufString);
+
     }
 
     private static String putRecipient(ByteBuffer buffer, byte chainId, String recipient) {

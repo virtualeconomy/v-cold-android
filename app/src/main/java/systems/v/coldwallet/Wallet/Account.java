@@ -59,6 +59,11 @@ public class Account {
         return false;
     }
 
+    public boolean isAccountByAddress(String address) {
+        if(getAddress().equals(address)) return true;
+        return false;
+    }
+
     public String getMutatedAddress() {
         String start, middle, end;
         int len = address.length();
