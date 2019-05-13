@@ -356,7 +356,7 @@ public class ColdWalletActivity extends AppCompatActivity {
                     FileUtil.save(wallet.getJson(), password, walletFilePath);
                 }
 
-                Log.d(TAG, wallet.getJson());
+                // Log.d(TAG, wallet.getJson());
                 intent = new Intent(activity, ColdWalletActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

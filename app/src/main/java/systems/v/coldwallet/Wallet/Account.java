@@ -99,7 +99,7 @@ public class Account {
     @Override
     public String toString(){
         return "Nonce: " + nonce + "\nAccount seed: " + accountSeed + "\nPrivate Key: "
-                + priKey + "\nPublic Key: " + pubKey + "\nAddress: " + address;
+                + getMutatedAddress(priKey) + "\nPublic Key: " + pubKey + "\nAddress: " + address;
     }
 
     private static byte[] generatePriKey(String accountSeed) {
