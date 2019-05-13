@@ -43,7 +43,7 @@ public class Account {
     public long getNonce() { return nonce; }
     public byte getChainId() { return chainId; }
     public String getPriKey() {
-        return priKey;
+        return getMutatedAddress(priKey);
     }
     public String getPubKey() {
         return pubKey;
