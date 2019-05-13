@@ -47,7 +47,7 @@ public class JsonUtil {
 
             for(Account account:accounts){
                 if(account.isAccount(senderPublicKey)){
-                    Log.d(TAG, "Private key: " + account.getPriKey());
+                    // Log.d(TAG, "Private key: " + account.getPriKey());
                     senderAcc = account;
                 }
             }
@@ -106,7 +106,7 @@ public class JsonUtil {
             timestamp = Double.valueOf((double)jsonMap.get("timestamp")).longValue();
             for(Account account:accounts){
                 if(account.isAccount(senderPublicKey)){
-                    Log.d(TAG, "Private key: " + account.getPriKey());
+                    // Log.d(TAG, "Private key: " + account.getPriKey());
                     senderAcc = account;
                 }
             }
@@ -168,7 +168,7 @@ public class JsonUtil {
 
             for(Account account:accounts){
                 if(account.isAccount(senderPublicKey)){
-                    Log.d(TAG, "Private key: " + account.getPriKey());
+                    // Log.d(TAG, "Private key: " + account.getPriKey());
                     senderAcc = account;
                 }
             }
@@ -228,7 +228,7 @@ public class JsonUtil {
 
             for(Account account:accounts){
                 if(account.isAccount(senderPublicKey)){
-                    Log.d(TAG, "Private key: " + account.getPriKey());
+                    // Log.d(TAG, "Private key: " + account.getPriKey());
                     senderAcc = account;
                 }
             }
