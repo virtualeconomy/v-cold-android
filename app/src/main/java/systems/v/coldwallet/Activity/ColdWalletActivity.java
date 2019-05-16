@@ -35,6 +35,7 @@ import java.util.HashMap;
 import systems.v.coldwallet.Util.FileUtil;
 import systems.v.coldwallet.Util.NetworkUtil;
 import systems.v.coldwallet.Util.PermissionUtil;
+import systems.v.coldwallet.Util.SegQrcode;
 import systems.v.coldwallet.Util.UIUtil;
 import systems.v.coldwallet.Wallet.Account;
 import systems.v.coldwallet.Wallet.Chain;
@@ -282,8 +283,25 @@ public class ColdWalletActivity extends AppCompatActivity {
 
                 case 10:
                     Log.d(TAG,"this " + qrContents);
+                    SegQrcode app;
+                    app = (SegQrcode) getApplication();
+
+                    int curPage = Integer.valueOf((String) qrContents.substring(4,5)).intValue();
+                    int totalPage = Integer.valueOf((String) qrContents.substring(6,7)).intValue();
+                    ArrayList<Account> tmpAccounts = new ArrayList<>(0);
+
+                    app.setBody("");
+                    app.setCheckSum("");
+                    app.setTotalPage(0);
+                    app.setCurPage(0);
+                    app.setAccounts(tmpAccounts);
+
+                    app.setCurPage(curPage);
+                    app.setTotalPage(totalPage);
+                    app.setCheckSum(qrContents.substring(8,16));
+                    app.setBody(qrContents.substring(17));
+                    app.setAccounts(accounts);
                     Intent intent = new Intent(activity, ScanSegQrcodeActivity.class);
-                    intent.putExtra("content",qrContents);
                     activity.startActivity(intent);
                     break;
 

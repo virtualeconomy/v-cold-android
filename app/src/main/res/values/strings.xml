@@ -106,6 +106,8 @@
     <string name="transaction_fee">Fee</string>
     <string name="transaction_attachment">Attachment</string>
     <string name="transaction_timestamp">Time</string>
+    <string name="transaction_description">Description</string>
+    <string name="transaction_type_register_contract">Register Contract</string>
     <string name="transaction_confirm">Confirm</string>
     <string name="transaction_done">Back to Home</string>
     <string name="contract_id">Contract ID</string>

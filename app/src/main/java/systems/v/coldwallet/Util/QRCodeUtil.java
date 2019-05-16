@@ -85,12 +85,10 @@ public class QRCodeUtil {
             return 0;
         }
         String tmpStr = qrContents.substring(0,3);
-        Log.d(TAG,tmpStr);
         if(tmpStr.equals("Seg")) {
             return 10;
         }
         HashMap<String,Object>  map = JsonUtil.getJsonAsMap(qrContents);
-        Log.d(TAG,"map" + map);
         if (map != null) {
             String mapOpc = (String)map.get("opc");
             if (mapOpc!=null && mapOpc.equals("seed"))
