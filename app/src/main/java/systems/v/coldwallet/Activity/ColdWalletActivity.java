@@ -222,7 +222,7 @@ public class ColdWalletActivity extends AppCompatActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         qrContents = result.getContents();
         int val = QRCodeUtil.processQrContents(qrContents);
-        if (wallet != null && (val != 1 && val != 0 && val !=6))
+        if (wallet != null && (val != 1 && val != 0 && val !=6 && val !=10 ))
         {
             val = 4;
         }
@@ -278,7 +278,13 @@ public class ColdWalletActivity extends AppCompatActivity {
                     }
 
                     JsonUtil.checkExecContractTx(activity, execJsonMap, accounts);
+                    break;
 
+                case 10:
+                    Log.d(TAG,"this " + qrContents);
+                    Intent intent = new Intent(activity, ScanSegQrcodeActivity.class);
+                    intent.putExtra("content",qrContents);
+                    activity.startActivity(intent);
                     break;
 
                 default:
@@ -295,6 +301,7 @@ public class ColdWalletActivity extends AppCompatActivity {
                             Toast.makeText(activity, "Incorrect transaction format", Toast.LENGTH_LONG).show();
                         }
                     } catch(Exception e){
+                        Log.d(TAG,"invalid code");
                         Toast.makeText(activity, "Invalid QrCode", Toast.LENGTH_LONG).show();
                     }
                     //UIUtil.createWrongTransactionDialog(activity);

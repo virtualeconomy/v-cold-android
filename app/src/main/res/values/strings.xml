@@ -10,6 +10,7 @@
     <string name="title_set_password">Set Password</string>
     <string name="title_confirm_tx">Confirm Transaction</string>
     <string name="title_about_us">About</string>
+    <string name="title_seg_qrcode">Set QrCode</string>
 
     <!-- Strings related to Wallet -->
     <string name="wallet_import_key">Import seed</string>
@@ -111,12 +112,21 @@
     <string name="function_id">Function ID</string>
     <string name="function_textual">Textual</string>
 
+    <!-- Strings related to Segmented QRCODE -->
+    <string name="transaction_seg_qrcode">This is a segmented qrcode</string>
+    <string name="qrcode_cur_page">Current Page</string>
+    <string name="qrcode_total_page">Total Page</string>
+    <string name="qrcode_back_button">Back</string>
+    <string name="qrcode_continue_button">Continue</string>
+
     <!-- Strings related to Account Number -->
     <string name="account_number_title">Configure Wallet</string>
     <string name="account_number_subtitle">Select the number of accounts</string>
     <string name="append_account_title">Add Accounts</string>
     <string name="append_account_subtitle">Select the number of accounts</string>
     <string name="account_number_confirm">Confirm</string>
+    <string name="account_number_continue">Continue</string>
+    <string name="account_number_next">Next</string>
 
     <!-- Strings related to Floating Action Menu -->
     <string name="import_seed">Import Seed</string>
