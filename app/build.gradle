@@ -6,7 +6,7 @@ android {
         applicationId "systems.v.coldwallet"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 3
+        versionCode 4
         versionName "0.2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
