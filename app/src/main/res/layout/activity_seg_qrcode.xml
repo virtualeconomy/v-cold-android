@@ -24,7 +24,7 @@
             android:layout_weight="3"
             android:layout_marginTop="17dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_qr_codes"
+            android:src="@drawable/ic_qr_codes2"
             android:scaleType="center"/>
 
         <TextView
