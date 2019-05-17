@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
+import android.util.Log;
 import java.util.HashMap;
 
 import systems.v.coldwallet.Activity.ScannerActivity;
@@ -79,11 +80,17 @@ public class QRCodeUtil {
     }
 
     public static int processQrContents(String qrContents) {
-        if (qrContents == null) return 0;
-
+        if (qrContents == null)
+        {
+            return 0;
+        }
+        String tmpStr = qrContents.substring(0,3);
+        if(tmpStr.equals("Seg")) {
+            return 10;
+        }
         HashMap<String,Object>  map = JsonUtil.getJsonAsMap(qrContents);
         if (map != null) {
-            String mapOpc = (String )map.get("opc");
+            String mapOpc = (String)map.get("opc");
             if (mapOpc!=null && mapOpc.equals("seed"))
             {
                 return 2;

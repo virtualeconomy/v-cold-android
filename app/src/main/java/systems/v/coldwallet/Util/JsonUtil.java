@@ -361,6 +361,7 @@ public class JsonUtil {
             mapper.readTree(str);
             return true;
         } catch (IOException e) {
+            Log.d(TAG,"e.message" + e.getMessage());
             return false;
         }
     }

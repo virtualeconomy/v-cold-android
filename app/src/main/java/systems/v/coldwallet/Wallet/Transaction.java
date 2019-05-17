@@ -30,6 +30,7 @@ public class Transaction {
     public static final String TAG = "Winston";
     public static final String OP_CODE = "transaction";
     public static final String FUN_OP_CODE = "function";
+    public static final String CREATE_OP_CODE = "contract";
 
     private final static Charset UTF8 = Charset.forName("UTF-8");
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -44,6 +45,7 @@ public class Transaction {
     private static final byte TRANSFER = 12;
     private static final byte LEASE = 3;
     private static final byte LEASE_CANCEL = 4;
+    private static final byte CREATE_CONTRACT = 8 ;
     private static final byte EXEC_CONTRACT = 9;
 
     /** Transaction ID. */
@@ -216,6 +218,45 @@ public class Transaction {
                 "timestamp", timestamp,
                 "attachment", Base58.encode(attachmentBytes));
     }
+
+    @NonNull
+    public static Transaction makeCreateContractTx(Account sender, String contract, String contractInit, String description,
+                                                 long fee, short feeScale,  BigInteger timestamp)
+    {
+        byte[] attachmentBytes = (description == null ? "" : description).getBytes();
+        ByteBuffer buf = ByteBuffer.allocate(KBYTE);
+        buf.put(CREATE_CONTRACT);
+
+
+        byte[] contractArr = Base58.decode(contract);
+        short contractLen = (short) contractArr.length;
+        buf.putShort(contractLen);
+        buf.put(contractArr);
+
+        byte[] contractInitArr = Base58.decode(contractInit);
+        short contractInitLen = (short)contractInitArr.length;
+        buf.putShort(contractInitLen);
+        buf.put(contractInitArr);
+
+        putString(buf, description);
+
+        buf.putLong(fee);
+        buf.putShort(feeScale);
+        putBigInteger(buf, timestamp);
+
+        printByteBufToHex(buf);
+
+        return new Transaction(sender, buf,"/transactions/broadcast",
+                "type", EXEC_CONTRACT,
+                "version", V2,
+                "senderPublicKey", sender.getPubKey(),
+                "contract", contract,
+                "fee", fee,
+                "feeScale",feeScale,
+                "timestamp", timestamp,
+                "attachment", Base58.encode(attachmentBytes));
+    }
+
 
     static class Deserializer extends JsonDeserializer<Transaction> {
         @Override
