@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -16,6 +17,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:layout_marginTop="17dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_qr_codes"
+            android:scaleType="center"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,15 +35,6 @@
             android:text="@string/transaction_seg_qrcode"
             android:textColor="@color/textLight"
             android:textSize="18sp" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:layout_marginTop="17dp"
-            android:layout_gravity="center"
-            android:src="@drawable/illustration"
-            android:scaleType="center"/>
-
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -136,7 +138,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="2"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp">

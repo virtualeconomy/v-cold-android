@@ -115,8 +115,8 @@
     <string name="function_textual">Textual</string>
 
     <!-- Strings related to Segmented QRCODE -->
-    <string name="transaction_seg_qrcode">This is a segmented qrcode</string>
-    <string name="qrcode_cur_page">Current Page</string>
+    <string name="transaction_seg_qrcode">This is multi-page QR code</string>
+    <string name="qrcode_cur_page">Scanned page</string>
     <string name="qrcode_total_page">Total Page</string>
     <string name="qrcode_back_button">Back</string>
     <string name="qrcode_continue_button">Continue</string>
