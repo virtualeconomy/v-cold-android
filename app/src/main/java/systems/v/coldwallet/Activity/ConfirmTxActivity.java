@@ -27,7 +27,7 @@ public class ConfirmTxActivity extends AppCompatActivity {
     private ConfirmTxActivity activity;
 
     private Account sender;
-    private String recipient,assetId, feeAssetId, txId, attachment, walletStr,function,functionTextual,contractId;
+    private String recipient,assetId, feeAssetId, txId, attachment, walletStr,function,functionTextual,contractId,description,contract,contractInitTextual,contractInit,contractInitExplain;
     private long timestamp, amount, fee;
     private short feeScale,functionId;
 
@@ -69,7 +69,7 @@ public class ConfirmTxActivity extends AppCompatActivity {
             return;
         }
         String op_code = intent.getStringExtra("OPC");
-        if (!Transaction.OP_CODE.equals(op_code) && !Transaction.FUN_OP_CODE.equals(op_code) ) {
+        if (!Transaction.OP_CODE.equals(op_code) && !Transaction.FUN_OP_CODE.equals(op_code) & !Transaction.CREATE_OP_CODE.equals(op_code) ) {
             Log.d(TAG,"confirm error");
             Toast.makeText(activity, "Wrong QRCode is used. This is not transaction", Toast.LENGTH_LONG).show();
             finish();
@@ -147,10 +147,25 @@ public class ConfirmTxActivity extends AppCompatActivity {
                 contractId = intent.getStringExtra("CONTRACTID");
                 functionId = intent.getShortExtra("FUNCTIONID", Short.valueOf("3"));
 
-                Log.d(TAG,"in that function" + sender);
-
                 UIUtil.setExecContractTx(activity, sender, function,contractId,attachment,functionTextual, fee, feeScale, timestamp,functionId);
                 break;
+
+            case "CREATE_CONTRACT":
+
+                senderStr = intent.getStringExtra("SENDER");
+
+                sender = gson.fromJson(senderStr, Account.class);
+                fee = intent.getLongExtra("FEE", 0);
+                feeScale = intent.getShortExtra("FEESCALE", Short.valueOf("100"));
+                timestamp =intent.getLongExtra("TIMESTAMP", 0);
+                description = intent.getStringExtra("DESCRIPTION");
+                contract = intent.getStringExtra("CONTRACT");
+                contractInitTextual = intent.getStringExtra("CONTRACTINITTEXTUAL");
+                contractInit = intent.getStringExtra("CONTRACTINIT");
+                contractInitExplain = intent.getStringExtra("CONTRACTINITEXPLAIN");
+
+                UIUtil.setCreateContractTx(activity, sender, contract, contractInit, contractInitTextual,contractInitExplain, description, fee, feeScale, timestamp);
+
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.custom_toolbar);

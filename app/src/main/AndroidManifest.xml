@@ -37,6 +37,7 @@
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
+        android:name=".Util.SegQrcode"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -64,6 +65,10 @@
             tools:replace="android:screenOrientation" />
         <activity
             android:name="systems.v.coldwallet.Activity.ImportSeedActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="systems.v.coldwallet.Activity.ScanSegQrcodeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity

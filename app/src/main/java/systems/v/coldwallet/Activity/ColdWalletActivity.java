@@ -35,6 +35,7 @@ import java.util.HashMap;
 import systems.v.coldwallet.Util.FileUtil;
 import systems.v.coldwallet.Util.NetworkUtil;
 import systems.v.coldwallet.Util.PermissionUtil;
+import systems.v.coldwallet.Util.SegQrcode;
 import systems.v.coldwallet.Util.UIUtil;
 import systems.v.coldwallet.Wallet.Account;
 import systems.v.coldwallet.Wallet.Chain;
@@ -222,7 +223,7 @@ public class ColdWalletActivity extends AppCompatActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         qrContents = result.getContents();
         int val = QRCodeUtil.processQrContents(qrContents);
-        if (wallet != null && (val != 1 && val != 0 && val !=6))
+        if (wallet != null && (val != 1 && val != 0 && val !=6 && val !=10 ))
         {
             val = 4;
         }
@@ -278,7 +279,30 @@ public class ColdWalletActivity extends AppCompatActivity {
                     }
 
                     JsonUtil.checkExecContractTx(activity, execJsonMap, accounts);
+                    break;
 
+                case 10:
+                    Log.d(TAG,"this " + qrContents);
+                    SegQrcode app;
+                    app = (SegQrcode) getApplication();
+
+                    int curPage = Integer.valueOf((String) qrContents.substring(4,5)).intValue();
+                    int totalPage = Integer.valueOf((String) qrContents.substring(6,7)).intValue();
+                    ArrayList<Account> tmpAccounts = new ArrayList<>(0);
+
+                    app.setBody("");
+                    app.setCheckSum("");
+                    app.setTotalPage(0);
+                    app.setCurPage(0);
+                    app.setAccounts(tmpAccounts);
+
+                    app.setCurPage(curPage);
+                    app.setTotalPage(totalPage);
+                    app.setCheckSum(qrContents.substring(8,16));
+                    app.setBody(qrContents.substring(17));
+                    app.setAccounts(accounts);
+                    Intent intent = new Intent(activity, ScanSegQrcodeActivity.class);
+                    activity.startActivity(intent);
                     break;
 
                 default:
@@ -295,6 +319,7 @@ public class ColdWalletActivity extends AppCompatActivity {
                             Toast.makeText(activity, "Incorrect transaction format", Toast.LENGTH_LONG).show();
                         }
                     } catch(Exception e){
+                        Log.d(TAG,"invalid code");
                         Toast.makeText(activity, "Invalid QrCode", Toast.LENGTH_LONG).show();
                     }
                     //UIUtil.createWrongTransactionDialog(activity);
