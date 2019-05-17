@@ -133,8 +133,8 @@ public class ScanSegQrcodeActivity extends AppCompatActivity {
                     if (!tmpCheck.equals(check) || tmpCur!= cur -1)
                     {
                         Toast.makeText(activity, "Incorrect QR code, scan again ", Toast.LENGTH_LONG).show();
-                        activity = this;
-                        activity.finish();
+                        // activity = this;
+                        // activity.finish();
                     }
                     else if (cur == total)
                     {

@@ -24,6 +24,14 @@
             android:text="@string/transaction_seg_qrcode"
             android:textColor="@color/textLight"
             android:textSize="18sp" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:layout_marginTop="17dp"
+            android:layout_gravity="center"
+            android:src="@drawable/illustration"
+            android:scaleType="center"/>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -128,7 +136,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="2"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp">
@@ -143,8 +151,8 @@
                 android:layout_marginRight="24dp"
                 android:text="@string/qrcode_back_button"
                 android:textSize="16sp"
-                android:textColor="@color/white"
-                android:background="@drawable/rounded_corners_orange"/>
+                android:textColor="@color/orange"
+                android:background="@drawable/rounded_corners"/>
 
             <Button
                 android:id="@+id/qrcode_continue_button"
@@ -155,8 +163,8 @@
                 android:layout_marginRight="24dp"
                 android:text="@string/qrcode_continue_button"
                 android:textSize="16sp"
-                android:textColor="@color/orange"
-                android:background="@drawable/rounded_corners"/>
+                android:textColor="@color/white"
+                android:background="@drawable/rounded_corners_orange"/>
         </LinearLayout>
 
     </LinearLayout>
