@@ -267,7 +267,7 @@ public class JsonUtil {
     @NonNull
     public static void checkExecContractTx(Activity activity, HashMap<String, Object> jsonMap,
                                     ArrayList<Account> accounts) {
-        String address, attachment,contractId,function,functionTextual, op_code, protocol;
+        String address, attachment,contractId,function,functionTextual, op_code, protocol,functionExplain;
         int api_version;
         long  fee, timestamp;
         short feeScale,functionId;
@@ -285,6 +285,7 @@ public class JsonUtil {
             contractId = (String )jsonMap.get("contractId");
             function = (String )jsonMap.get("function");
             functionTextual = (String)jsonMap.get("functionTextual");
+            functionExplain = (String)jsonMap.get("functionExplain");
 
             functionId  = Double.valueOf((double)jsonMap.get("functionId")).shortValue();
             fee = Double.valueOf((double)jsonMap.get("fee")).longValue();
@@ -315,6 +316,7 @@ public class JsonUtil {
                 intent.putExtra("FUNCTION", function);
                 intent.putExtra("FUNCTIONID", functionId);
                 intent.putExtra("FUNCTIONTEXTUAL", functionTextual);
+                intent.putExtra("FUNCTIONEXPLAIN",functionExplain);
                 intent.putExtra("CONTRACTID", contractId);
 
                 activity.startActivity(intent);
