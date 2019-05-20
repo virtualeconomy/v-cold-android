@@ -27,7 +27,7 @@ public class ConfirmTxActivity extends AppCompatActivity {
     private ConfirmTxActivity activity;
 
     private Account sender;
-    private String recipient,assetId, feeAssetId, txId, attachment, walletStr,function,functionTextual,contractId,description,contract,contractInitTextual,contractInit,contractInitExplain;
+    private String recipient,assetId, feeAssetId, txId, attachment, walletStr,function,functionTextual, functionExplain, contractId,description,contract,contractInitTextual,contractInit,contractInitExplain;
     private long timestamp, amount, fee;
     private short feeScale,functionId;
 
@@ -144,10 +144,11 @@ public class ConfirmTxActivity extends AppCompatActivity {
                 attachment = intent.getStringExtra("ATTACHMENT");
                 function = intent.getStringExtra("FUNCTION");
                 functionTextual = intent.getStringExtra("FUNCTIONTEXTUAL");
+                functionExplain = intent.getStringExtra("FUNCTIONEXPLAIN");
                 contractId = intent.getStringExtra("CONTRACTID");
                 functionId = intent.getShortExtra("FUNCTIONID", Short.valueOf("3"));
 
-                UIUtil.setExecContractTx(activity, sender, function,contractId,attachment,functionTextual, fee, feeScale, timestamp,functionId);
+                UIUtil.setExecContractTx(activity, sender, function,contractId,attachment,functionExplain, fee, feeScale, timestamp,functionId);
                 break;
 
             case "CREATE_CONTRACT":
@@ -164,7 +165,7 @@ public class ConfirmTxActivity extends AppCompatActivity {
                 contractInit = intent.getStringExtra("CONTRACTINIT");
                 contractInitExplain = intent.getStringExtra("CONTRACTINITEXPLAIN");
 
-                UIUtil.setCreateContractTx(activity, sender, contract, contractInit, contractInitTextual,contractInitExplain, description, fee, feeScale, timestamp);
+                UIUtil.setCreateContractTx(activity, sender, contract, contractInit, contractInitExplain,contractInitExplain, description, fee, feeScale, timestamp);
 
         }
 

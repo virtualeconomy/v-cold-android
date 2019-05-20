@@ -389,7 +389,7 @@ public class UIUtil {
     }
 
     public static void setExecContractTx(final Activity activity, final Account sender,
-                                              final String function, final String contractId, final String attachment, final String finalTextual, final long fee, final short feeScale, final long timestamp, final short functionId) {
+                                              final String function, final String contractId, final String attachment, final String explain, final long fee, final short feeScale, final long timestamp, final short functionId) {
         activity.setContentView(R.layout.custom_layout_exec_contranct_tx);
 
 
@@ -397,7 +397,7 @@ public class UIUtil {
         TextView contractIdTx = (TextView) activity.findViewById(R.id.contract_id);
         TextView functionIdTx = (TextView) activity.findViewById(R.id.function_id);
         TextView attachmentTx = (TextView) activity.findViewById(R.id.transaction_attachment);
-        TextView textualTx = (TextView) activity.findViewById(R.id.function_textual);
+        TextView explainTx = (TextView) activity.findViewById(R.id.function_explain);
         TextView timestampTx = (TextView) activity.findViewById(R.id.transaction_timestamp);
         TextView feeTx = (TextView)activity.findViewById(R.id.transaction_fee);
         Button confirm = (Button) activity.findViewById(R.id.transaction_confirm);
@@ -413,7 +413,7 @@ public class UIUtil {
 
         attachmentTx.setText(attachment);
         contractIdTx.setText(contractId);
-        textualTx.setText(finalTextual);
+        explainTx.setText(explain);
 
         final BigInteger timeBigInteger = BigInteger.valueOf(timestamp)
                 .multiply(BigInteger.valueOf(1000000L));
@@ -449,7 +449,7 @@ public class UIUtil {
 
         final TextView senderTx = (TextView) activity.findViewById(R.id.transaction_sender);
         TextView attachmentTx = (TextView) activity.findViewById(R.id.transaction_attachment);
-        TextView textualTx = (TextView) activity.findViewById(R.id.function_textual);
+        TextView explainTx = (TextView) activity.findViewById(R.id.function_explain);
         TextView timestampTx = (TextView) activity.findViewById(R.id.transaction_timestamp);
         TextView feeTx = (TextView)activity.findViewById(R.id.transaction_fee);
         Button confirm = (Button) activity.findViewById(R.id.transaction_confirm);
@@ -462,7 +462,7 @@ public class UIUtil {
         timestampTx.setText(time + "\n" + TimeZone.getDefault().getDisplayName());
 
         attachmentTx.setText(description);
-        textualTx.setText(contractInitExplain);
+        explainTx.setText(contractInitExplain);
 
         final BigInteger timeBigInteger = BigInteger.valueOf(timestamp)
                 .multiply(BigInteger.valueOf(1000000L));
