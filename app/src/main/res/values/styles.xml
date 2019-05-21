@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -8,6 +7,20 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="ConfirmFieldValue">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/textDark</item>
+    </style>
+
+    <style name="ConfirmFieldName">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/textLight</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
 
     <style name="HintText" parent="TextAppearance.AppCompat">
         <item name="android:textSize">14sp</item>

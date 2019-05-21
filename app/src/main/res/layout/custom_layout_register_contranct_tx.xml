@@ -48,12 +48,8 @@
                     android:weightSum="3">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="@string/transaction_type"
-                        android:textColor="@color/textLight"
-                        android:textSize="14sp" />
+                        style="@style/ConfirmFieldName" />
 
                     <TextView
                         android:id="@+id/transaction_type"
@@ -63,8 +59,7 @@
                         android:layout_weight="2"
                         android:text="@string/transaction_type_register_contract"
                         android:textAlignment="textEnd"
-                        android:textColor="@color/textDark"
-                        android:textSize="14sp" />
+                        style="@style/ConfirmFieldValue" />
                 </LinearLayout>
 
                 <View
@@ -80,12 +75,8 @@
                     android:weightSum="3">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="@string/transaction_sender"
-                        android:textColor="@color/textLight"
-                        android:textSize="14sp" />
+                        style="@style/ConfirmFieldName" />
 
                     <HorizontalScrollView
                         android:layout_width="0dp"
@@ -99,8 +90,7 @@
                             android:layout_gravity="end"
                             android:maxLines="1"
                             android:textAlignment="textEnd"
-                            android:textColor="@color/textDark"
-                            android:textSize="14sp" />
+                            style="@style/ConfirmFieldValue" />
                     </HorizontalScrollView>
                 </LinearLayout>
 
@@ -117,12 +107,8 @@
                     android:weightSum="3">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="@string/transaction_timestamp"
-                        android:textColor="@color/textLight"
-                        android:textSize="14sp" />
+                        style="@style/ConfirmFieldName" />
 
                     <TextView
                         android:id="@+id/transaction_timestamp"
@@ -132,8 +118,7 @@
                         android:layout_weight="2"
                         android:lines="2"
                         android:textAlignment="textEnd"
-                        android:textColor="@color/textDark"
-                        android:textSize="14sp" />
+                        style="@style/ConfirmFieldValue" />
                 </LinearLayout>
 
 
@@ -150,12 +135,8 @@
                     android:weightSum="3">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="@string/transaction_fee"
-                        android:textColor="@color/textLight"
-                        android:textSize="14sp" />
+                        style="@style/ConfirmFieldName" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -175,8 +156,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
                             android:textAlignment="textEnd"
-                            android:textColor="@color/textDark"
-                            android:textSize="14sp" />
+                            style="@style/ConfirmFieldValue" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -193,12 +173,8 @@
                     android:weightSum="3">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="@string/transaction_description"
-                        android:textColor="@color/textLight"
-                        android:textSize="14sp" />
+                        style="@style/ConfirmFieldName" />
 
                     <HorizontalScrollView
                         android:layout_width="0dp"
@@ -212,8 +188,7 @@
                             android:layout_gravity="end"
                             android:maxLines="1"
                             android:textAlignment="textEnd"
-                            android:textColor="@color/textDark"
-                            android:textSize="14sp" />
+                            style="@style/ConfirmFieldValue" />
                     </HorizontalScrollView>
                 </LinearLayout>
 
@@ -230,28 +205,21 @@
                     android:weightSum="3">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="@string/function_explain"
-                        android:textColor="@color/textLight"
-                        android:textSize="14sp" />
+                        style="@style/ConfirmFieldName" />
 
-                    <HorizontalScrollView
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/function_explain"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2">
-
-                        <TextView
-                            android:id="@+id/function_explain"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:maxLines="1"
-                            android:textAlignment="textEnd"
-                            android:textColor="@color/textDark"
-                            android:textSize="14sp" />
-                    </HorizontalScrollView>
+                        android:layout_gravity="end"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginEnd="48dp"
+                        android:ellipsize="none"
+                        android:lines="2"
+                        android:maxLines="3"
+                        android:textAlignment="textEnd"
+                        style="@style/ConfirmFieldValue" />
                 </LinearLayout>
 
             </LinearLayout>
