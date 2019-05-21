@@ -321,9 +321,10 @@
                         android:layout_marginEnd="48dp"
                         android:ellipsize="none"
                         android:lines="2"
+                        android:maxLines="3"
                         android:textAlignment="textEnd"
                         android:textColor="@color/textDark"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
 
