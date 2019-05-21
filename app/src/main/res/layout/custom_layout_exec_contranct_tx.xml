@@ -307,26 +307,23 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:lines="2"
                         android:text="@string/function_explain"
                         android:textColor="@color/textLight"
                         android:textSize="14sp" />
 
-                    <HorizontalScrollView
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/function_explain"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2">
-
-                        <TextView
-                            android:id="@+id/function_explain"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:maxLines="3"
-                            android:lines="2"
-                            android:textAlignment="textEnd"
-                            android:textColor="@color/textDark"
-                            android:textSize="14sp" />
-                    </HorizontalScrollView>
+                        android:layout_gravity="end"
+                        android:layout_marginRight="48dp"
+                        android:layout_marginEnd="48dp"
+                        android:ellipsize="none"
+                        android:lines="2"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/textDark"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
 
