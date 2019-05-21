@@ -9,6 +9,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ConfirmText">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/textDark</item>
+    </style>
+
+    <style name="inputText">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/textLight</item>
+    </style>
+
+
     <style name="HintText" parent="TextAppearance.AppCompat">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/orange</item>
