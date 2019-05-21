@@ -413,7 +413,23 @@ public class UIUtil {
 
         attachmentTx.setText(attachment);
         contractIdTx.setText(contractId);
-        explainTx.setText(explain);
+        int textWidth = 32;
+        if(explain.length()>textWidth)
+        {
+            int i = textWidth;
+            while(i>0)
+            {
+                if(explain.substring(i-1,i).equals(" "))
+                {
+                    break;
+                }
+                --i;
+            }
+            explainTx.setText(explain.substring(0,i) + "\n" + explain.substring(i));
+        }
+        else {
+            explainTx.setText(explain);
+        }
 
         final BigInteger timeBigInteger = BigInteger.valueOf(timestamp)
                 .multiply(BigInteger.valueOf(1000000L));
@@ -462,7 +478,25 @@ public class UIUtil {
         timestampTx.setText(time + "\n" + TimeZone.getDefault().getDisplayName());
 
         attachmentTx.setText(description);
-        explainTx.setText(contractInitExplain);
+        // Log.d("winston", "length" +contractInitExplain.length());
+
+        int textWidth = 32;
+        if(contractInitExplain.length()>textWidth)
+        {
+            int i = textWidth;
+            while(i>0)
+            {
+                if(contractInitExplain.substring(i-1,i).equals(" "))
+                {
+                   break;
+                }
+                --i;
+            }
+            explainTx.setText(contractInitExplain.substring(0,i) + "\n" + contractInitExplain.substring(i));
+        }
+        else {
+            explainTx.setText(contractInitExplain);
+        }
 
         final BigInteger timeBigInteger = BigInteger.valueOf(timestamp)
                 .multiply(BigInteger.valueOf(1000000L));
