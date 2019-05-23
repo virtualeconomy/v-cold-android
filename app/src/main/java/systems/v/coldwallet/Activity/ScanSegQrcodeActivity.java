@@ -156,34 +156,36 @@ public class ScanSegQrcodeActivity extends AppCompatActivity {
 
                         if (buffer.toString().equals(check))
                         {
-                            HashMap<String, Object> createJsonMap = JsonUtil.getJsonAsMap(totalBody);
+                            HashMap<String, Object> jsonMap = JsonUtil.getJsonAsMap(totalBody);
                             // JsonUtil.isJsonString(totalBody);
                             Log.d(TAG,"createJsonMap" + JsonUtil.isJsonString(totalBody) + totalBody);
-                            String address, attachment,contract, op_code, protocol,description, contractInit,contractInitTextual,contractInitExplain;
+                            String address, attachment,contract, op_code, protocol,description, contractInit,contractInitTextual,contractInitExplain,
+                            contractId, function, functionTextual, functionExplain;
                             int api_version;
                             long  fee, timestamp;
                             short feeScale,functionId;
-                            String[] keys = {"address","contract", "fee", "feeScale", "timestamp"};
+                            String[] registerKeys = {"address", "fee", "feeScale", "timestamp","contract"};
+                            String[] execKeys = {"address","fee","feeScale","timestamp", "contractId"};
                             Account senderAcc = null;
                             ArrayList<Account> accounts = qrcode.getAccounts();
 
-                            if (JsonUtil.containsKeys(createJsonMap, keys))
+                            if (JsonUtil.containsKeys(jsonMap, registerKeys))
                             {
 
-                                protocol = (String) createJsonMap.get("protocol");
-                                api_version = Double.valueOf((double) createJsonMap.get("api")).intValue();
-                                op_code = (String) createJsonMap.get("opc");
+                                protocol = (String) jsonMap.get("protocol");
+                                api_version = Double.valueOf((double) jsonMap.get("api")).intValue();
+                                op_code = (String) jsonMap.get("opc");
 
-                                address = (String) createJsonMap.get("address");
-                                fee = Double.valueOf((double) createJsonMap.get("fee")).longValue();
-                                feeScale = Double.valueOf((double) createJsonMap.get("feeScale")).shortValue();
-                                timestamp = Double.valueOf((double) createJsonMap.get("timestamp")).longValue();
-                                contract = (String) createJsonMap.get("contract");
+                                address = (String) jsonMap.get("address");
+                                fee = Double.valueOf((double) jsonMap.get("fee")).longValue();
+                                feeScale = Double.valueOf((double) jsonMap.get("feeScale")).shortValue();
+                                timestamp = Double.valueOf((double) jsonMap.get("timestamp")).longValue();
+                                contract = (String) jsonMap.get("contract");
 
-                                description = (String) createJsonMap.get("description");
-                                contractInit = (String) createJsonMap.get("contractInit");
-                                contractInitTextual = (String) createJsonMap.get("contractInitTextual");
-                                contractInitExplain = (String) createJsonMap.get("contractInitExplain");
+                                description = (String) jsonMap.get("description");
+                                contractInit = (String) jsonMap.get("contractInit");
+                                contractInitTextual = (String) jsonMap.get("contractInitTextual");
+                                contractInitExplain = (String) jsonMap.get("contractInitExplain");
 
                                 for(Account account:accounts){
                                     if(account.isAccountByAddress(address)){
@@ -219,6 +221,61 @@ public class ScanSegQrcodeActivity extends AppCompatActivity {
                                     activity.finish();
                                     Toast.makeText(activity, "Wallet does not contain sender", Toast.LENGTH_LONG).show();
                                 }
+                            }
+                            else if (JsonUtil.containsKeys(jsonMap, execKeys))
+                            {
+                                protocol = (String) jsonMap.get("protocol");
+                                api_version = Double.valueOf((double)jsonMap.get("api")).intValue();
+                                op_code = (String) jsonMap.get("opc");
+
+                                address = (String)jsonMap.get("address");
+                                Log.d(TAG, address);
+                                attachment = (String)jsonMap.get("attachment");
+                                contractId = (String )jsonMap.get("contractId");
+                                function = (String )jsonMap.get("function");
+                                functionTextual = (String)jsonMap.get("functionTextual");
+                                functionExplain = (String)jsonMap.get("functionExplain");
+
+                                functionId  = Double.valueOf((double)jsonMap.get("functionId")).shortValue();
+                                fee = Double.valueOf((double)jsonMap.get("fee")).longValue();
+                                feeScale = Double.valueOf((double)jsonMap.get("feeScale")).shortValue();
+                                timestamp = Double.valueOf((double)jsonMap.get("timestamp")).longValue();
+
+                                for(Account account:accounts){
+                                    if(account.isAccountByAddress(address)){
+                                        senderAcc = account;
+                                    }
+                                }
+
+                                if (senderAcc != null) {
+                                    Gson gson = new Gson();
+                                    // Wallet wallet = ((ColdWalletActivity) activity).getWallet();
+                                    // String walletStr = gson.toJson(wallet);
+                                    Intent intent = new Intent(activity, ConfirmTxActivity.class);
+                                    intent.putExtra("PROTOCOL", protocol);
+                                    intent.putExtra("API", api_version);
+                                    intent.putExtra("OPC", op_code);
+                                    intent.putExtra("ACTION", "EXEC_CONTRACT");
+                                    // intent.putExtra("WALLET", walletStr);
+                                    intent.putExtra("SENDER", gson.toJson(senderAcc));
+                                    intent.putExtra("FEE", fee);
+                                    intent.putExtra("FEESCALE", feeScale);
+                                    intent.putExtra("TIMESTAMP", timestamp);
+                                    intent.putExtra("ATTACHMENT", attachment);
+                                    intent.putExtra("FUNCTION", function);
+                                    intent.putExtra("FUNCTIONID", functionId);
+                                    intent.putExtra("FUNCTIONTEXTUAL", functionTextual);
+                                    intent.putExtra("FUNCTIONEXPLAIN",functionExplain);
+                                    intent.putExtra("CONTRACTID", contractId);
+
+                                    activity.startActivity(intent);
+                                }
+                                else
+                                {
+                                    activity.finish();
+                                    Toast.makeText(activity, "Wallet does not contain sender", Toast.LENGTH_LONG).show();
+                                }
+
                             }
                             else
                             {
