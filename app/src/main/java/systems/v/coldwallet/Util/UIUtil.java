@@ -160,8 +160,8 @@ public class UIUtil {
         amountTx.setText(String.valueOf(convert(amount)));
         feeTx.setText(String.valueOf(convert(fee)));
 
-        String time = new SimpleDateFormat("yyyy-MM-dd  HH:MM:SS")
-                .format(new Timestamp(timestamp));
+        String time = new Timestamp(timestamp).toString();
+        time = time.substring(0, time.indexOf("."));
         timestampTx.setText(time + "\n" + TimeZone.getDefault().getDisplayName());
 
         if (!attachment.equals("")) { attachmentTx.setText(attachment); }
@@ -234,8 +234,8 @@ public class UIUtil {
         else { attachmentTx.setText("None"); }
 
 
-        String time = new SimpleDateFormat("yyyy-MM-dd  HH:MM:SS")
-                .format(new Timestamp(timestamp));
+        String time = new Timestamp(timestamp).toString();
+        time = time.substring(0, time.indexOf("."));
         timestampTx.setText(time + "\n" + TimeZone.getDefault().getDisplayName());
 
         final BigInteger timeBigInteger = BigInteger.valueOf(timestamp)
@@ -298,8 +298,8 @@ public class UIUtil {
         amountTx.setText(String.valueOf(convert(amount)));
         feeTx.setText(String.valueOf(convert(fee)));
 
-        String time = new SimpleDateFormat("yyyy-MM-dd  HH:MM:SS")
-                .format(new Timestamp(timestamp));
+        String time = new Timestamp(timestamp).toString();
+        time = time.substring(0, time.indexOf("."));
         timestampTx.setText(time + "\n" + TimeZone.getDefault().getDisplayName());
 
         final BigInteger timeBigInteger = BigInteger.valueOf(timestamp)
@@ -357,8 +357,8 @@ public class UIUtil {
         senderTx.setText(sender.getMutatedAddress());
         feeTx.setText(String.valueOf(convert(fee)));
 
-        String time = new SimpleDateFormat("yyyy-MM-dd  HH:MM:SS")
-                .format(new Timestamp(timestamp));
+        String time = new Timestamp(timestamp).toString();
+        time = time.substring(0, time.indexOf("."));
         timestampTx.setText(time + "\n" + TimeZone.getDefault().getDisplayName());
 
         final BigInteger timeBigInteger = BigInteger.valueOf(timestamp)
@@ -405,8 +405,8 @@ public class UIUtil {
         senderTx.setText(sender.getMutatedAddress());
         feeTx.setText(String.valueOf(convert(fee)));
 
-        String time = new SimpleDateFormat("yyyy-MM-dd  HH:MM:SS")
-                .format(new Timestamp(timestamp));
+        String time = new Timestamp(timestamp).toString();
+        time = time.substring(0, time.indexOf("."));
         timestampTx.setText(time + "\n" + TimeZone.getDefault().getDisplayName());
 
         functionIdTx.setText(String.valueOf(functionId));
@@ -457,8 +457,8 @@ public class UIUtil {
         senderTx.setText(sender.getMutatedAddress());
         feeTx.setText(String.valueOf(convert(fee)));
 
-        String time = new SimpleDateFormat("yyyy-MM-dd  HH:MM:SS")
-                .format(new Timestamp(timestamp));
+        String time = new Timestamp(timestamp).toString();
+        time = time.substring(0, time.indexOf("."));
         timestampTx.setText(time + "\n" + TimeZone.getDefault().getDisplayName());
 
         attachmentTx.setText(description);
