@@ -411,7 +411,7 @@ public class UIUtil {
 
         functionIdTx.setText(String.valueOf(functionId));
 
-        attachmentTx.setText(attachment);
+        attachmentTx.setText(new String(Base58.decode(attachment)));
         contractIdTx.setText(contractId);
         explainTx.setText(explain);
 

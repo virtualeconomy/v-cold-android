@@ -237,7 +237,7 @@
                     android:weightSum="3">
 
                     <TextView
-                        android:text="@string/transaction_attachment"
+                        android:text="@string/transaction_description"
                         style="@style/ConfirmFieldName"/>
 
                     <HorizontalScrollView

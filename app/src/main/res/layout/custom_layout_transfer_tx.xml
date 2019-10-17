@@ -272,7 +272,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/textLight"
                     android:textSize="14sp"
-                    android:text="@string/transaction_attachment" />
+                    android:text="@string/transaction_description" />s
 
                 <HorizontalScrollView
                     android:layout_width="0dp"
