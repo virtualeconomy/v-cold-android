@@ -275,7 +275,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/transaction_attachment"
+                        android:text="@string/transaction_description"
                         android:textColor="@color/textLight"
                         android:textSize="14sp" />
 

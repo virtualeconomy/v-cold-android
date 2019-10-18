@@ -195,8 +195,11 @@ public class Transaction {
         short functionLen = (short)functionArr.length;
         buf.putShort(functionLen);
         buf.put(functionArr);
-
-        byte[] attachmentArr = Base58.decode(attachment);
+        byte[] attachmentArr = attachmentBytes;
+        try {
+            attachmentArr = Base58.decode(attachment);
+        } catch (Exception e) {
+        }
         short attachmentLen = (short)attachmentArr.length;
         buf.putShort(attachmentLen);
         buf.put(attachmentArr);
@@ -216,7 +219,7 @@ public class Transaction {
                 "feeScale",feeScale,
                 "functionId",functionId,
                 "timestamp", timestamp,
-                "attachment", Base58.encode(attachmentBytes));
+                "attachment", Base58.encode(attachmentArr));
     }
 
     @NonNull

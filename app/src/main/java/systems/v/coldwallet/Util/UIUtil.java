@@ -408,10 +408,13 @@ public class UIUtil {
         String time = new Timestamp(timestamp).toString();
         time = time.substring(0, time.indexOf("."));
         timestampTx.setText(time + "\n" + TimeZone.getDefault().getDisplayName());
-
+        String tempAttachment = attachment;
         functionIdTx.setText(String.valueOf(functionId));
-
-        attachmentTx.setText(attachment);
+        try {
+            tempAttachment = new String(Base58.decode(attachment));
+        } catch(Exception e) {
+        }
+        attachmentTx.setText(tempAttachment);
         contractIdTx.setText(contractId);
         explainTx.setText(explain);
 
