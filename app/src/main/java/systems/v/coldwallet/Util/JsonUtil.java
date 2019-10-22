@@ -41,7 +41,11 @@ public class JsonUtil {
             attachment = (String) jsonMap.get("attachment");
             assetId = (String) jsonMap.get("assetId");
             feeAssetId = (String) jsonMap.get("feeAssetId");
-            amount = Long.valueOf((String) jsonMap.get("amount")).longValue();
+            try {
+                amount = Long.valueOf((String)jsonMap.get("amount")).longValue();
+            } catch (Exception e) {
+                amount = Double.valueOf((double)jsonMap.get("amount")).longValue();
+            }
             fee = Double.valueOf((double)jsonMap.get("fee")).longValue();
             timestamp = Double.valueOf((double)jsonMap.get("timestamp")).longValue();
 
@@ -99,7 +103,11 @@ public class JsonUtil {
             op_code = (String) jsonMap.get("opc");
             senderPublicKey = (String) jsonMap.get("senderPublicKey");
             recipient = (String) jsonMap.get("recipient");
-            amount = Long.valueOf((String)jsonMap.get("amount")).longValue();
+            try {
+                amount = Long.valueOf((String)jsonMap.get("amount")).longValue();
+            } catch (Exception e) {
+                amount = Double.valueOf((double)jsonMap.get("amount")).longValue();
+            }
             attachment = (String) jsonMap.get("attachment");
             fee = Double.valueOf((double)jsonMap.get("fee")).longValue();
             feeScale = Double.valueOf((double)jsonMap.get("feeScale")).shortValue();
@@ -161,7 +169,11 @@ public class JsonUtil {
 
             senderPublicKey = (String) jsonMap.get("senderPublicKey");
             recipient = (String) jsonMap.get("recipient");
-            amount = Long.valueOf((String)jsonMap.get("amount")).longValue();
+            try {
+                amount = Long.valueOf((String)jsonMap.get("amount")).longValue();
+            } catch (Exception e) {
+                amount = Double.valueOf((double)jsonMap.get("amount")).longValue();
+            }
             fee = Double.valueOf((double)jsonMap.get("fee")).longValue();
             feeScale = Double.valueOf((double)jsonMap.get("feeScale")).shortValue();
             timestamp = Double.valueOf((double)jsonMap.get("timestamp")).longValue();
