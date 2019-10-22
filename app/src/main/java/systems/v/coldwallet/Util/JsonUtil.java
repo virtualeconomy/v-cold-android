@@ -44,7 +44,7 @@ public class JsonUtil {
             try {
                 amount = Long.valueOf((String)jsonMap.get("amount")).longValue();
             } catch (Exception e) {
-                amount = Double.valueOf( (double)jsonMap.get("amount")).longValue();
+                amount = Double.valueOf((double)jsonMap.get("amount")).longValue();
             }
             fee = Double.valueOf((double)jsonMap.get("fee")).longValue();
             timestamp = Double.valueOf((double)jsonMap.get("timestamp")).longValue();
@@ -106,7 +106,7 @@ public class JsonUtil {
             try {
                 amount = Long.valueOf((String)jsonMap.get("amount")).longValue();
             } catch (Exception e) {
-                amount = Double.valueOf( (double)jsonMap.get("amount")).longValue();
+                amount = Double.valueOf((double)jsonMap.get("amount")).longValue();
             }
             attachment = (String) jsonMap.get("attachment");
             fee = Double.valueOf((double)jsonMap.get("fee")).longValue();
@@ -172,7 +172,7 @@ public class JsonUtil {
             try {
                 amount = Long.valueOf((String)jsonMap.get("amount")).longValue();
             } catch (Exception e) {
-                amount = Double.valueOf( (double)jsonMap.get("amount")).longValue();
+                amount = Double.valueOf((double)jsonMap.get("amount")).longValue();
             }
             fee = Double.valueOf((double)jsonMap.get("fee")).longValue();
             feeScale = Double.valueOf((double)jsonMap.get("feeScale")).shortValue();
