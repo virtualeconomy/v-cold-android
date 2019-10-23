@@ -48,8 +48,8 @@
 
     <!-- Strings related to About us -->
     <string name="copyright">Copyright (c) 2018-2019 V SYSTEMS LIMITED</string>
-    <string name="version_main">V Cold Wallet version 0.2.0</string>
-    <string name="version_test">V Cold Wallet version 0.2.0(for Testnet)</string>
+    <string name="version_main">V Cold Wallet version 0.2.1</string>
+    <string name="version_test">V Cold Wallet version 0.2.1(for Testnet)</string>
     <string name="description">V Cold Wallet is a reference implementation of
         high security cold storage for the V Systems blockchain network. It
         implements V Systems wallet format specification 1.0. and V Systems 
@@ -96,7 +96,7 @@
     <string name="transaction_subtitle">Please review the following details carefully</string>
     <string name="transaction_type">Type</string>
     <string name="transaction_type_payment">Payment</string>
-    <string name="transaction_type_exec_contract">Execute Contrate</string>
+    <string name="transaction_type_exec_contract">Execute Contract Function</string>
     <string name="transaction_type_transfer">Transfer</string>
     <string name="transaction_type_lease">Lease</string>
     <string name="transaction_type_cancel_lease">Cancel Lease</string>
