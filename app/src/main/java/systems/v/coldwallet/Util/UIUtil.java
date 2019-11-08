@@ -163,8 +163,13 @@ public class UIUtil {
         String time = new Timestamp(timestamp).toString();
         time = time.substring(0, time.indexOf("."));
         timestampTx.setText(time + "\n" + TimeZone.getDefault().getDisplayName());
+        String tempAttachment = attachment;
+        try {
+            tempAttachment = new String(Base58.decode(attachment));
+        } catch(Exception e) {
+        }
+        if (!tempAttachment.equals("")) { attachmentTx.setText(tempAttachment); }
 
-        if (!attachment.equals("")) { attachmentTx.setText(attachment); }
         else { attachmentTx.setText("None"); }
 
         final BigInteger timeBigInteger = BigInteger.valueOf(timestamp)
@@ -414,7 +419,8 @@ public class UIUtil {
             tempAttachment = new String(Base58.decode(attachment));
         } catch(Exception e) {
         }
-        attachmentTx.setText(tempAttachment);
+        if (!tempAttachment.equals("")) { attachmentTx.setText(tempAttachment); }
+        else { attachmentTx.setText("None"); }
         contractIdTx.setText(contractId);
         explainTx.setText(explain);
 
