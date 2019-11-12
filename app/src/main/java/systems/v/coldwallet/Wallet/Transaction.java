@@ -94,10 +94,14 @@ public class Transaction {
         putBigInteger(buf, timestamp);
         buf.putLong(amount).putLong(fee);
         buf.putShort(feeScale);
+        byte[] attachmentArr = attachmentBytes;
+        try {
+            attachmentArr = Base58.decode(attachment);
+        } catch (Exception e) {
+        }
         recipient = putRecipient(buf, sender.getChainId(), recipient);
-        putString(buf, attachment);
+        putString(buf, new String(attachmentArr));
         printByteBufToHex(buf);
-
         return new Transaction(sender, buf,"/transactions/broadcast",
                 "type", PAYMENT,
                 "version", V2,
@@ -107,7 +111,7 @@ public class Transaction {
                 "fee", fee,
                 "feeScale", feeScale,
                 "timestamp", timestamp,
-                "attachment", Base58.encode(attachmentBytes));
+                "attachment", Base58.encode(attachmentArr));
     }
 
     @NonNull
