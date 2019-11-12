@@ -231,7 +231,7 @@ public class Transaction {
                                                  long fee, short feeScale,  BigInteger timestamp)
     {
         byte[] attachmentBytes = (description == null ? "" : description).getBytes();
-        ByteBuffer buf = ByteBuffer.allocate(KBYTE);
+        ByteBuffer buf = ByteBuffer.allocate(2048);
         buf.put(CREATE_CONTRACT);
 
 
