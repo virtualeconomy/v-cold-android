@@ -26,7 +26,7 @@ public class Wallet {
     private byte chainId;
 
     public static final String PROTOCOL = "v.systems";
-    public static final int API_VERSION = 3;
+    public static final int API_VERSION = 4;
     public static final int SEED_API_VERSION =1;
     public static final int TX_API_VERSION =1;
     public static final int ADDRESS_API_VERSION =1;
