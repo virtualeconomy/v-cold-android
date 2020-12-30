@@ -178,11 +178,13 @@ public class ColdWalletActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.action_bar, menu);
+        if (walletFile.exists()) {
+            getMenuInflater().inflate(R.menu.action_bar, menu);
 
-        Drawable icon = menu.getItem(0).getIcon();
-        icon.mutate();
-        icon.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+            Drawable icon = menu.getItem(0).getIcon();
+            icon.mutate();
+            icon.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+        }
         return true;
     }
 
