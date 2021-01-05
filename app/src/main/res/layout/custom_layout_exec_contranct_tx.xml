@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -275,15 +276,17 @@
 
                     <TextView
                         android:id="@+id/function_explain"
+                        style="@style/ConfirmFieldValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_marginRight="148dp"
-                        android:layout_marginEnd="48dp"
+                        android:layout_gravity="center"
                         android:ellipsize="none"
-                        android:lines="2"
-                        android:textAlignment="textEnd"
-                        style="@style/ConfirmFieldValue" />
+                        android:gravity="center"
+                        android:lines="3"
+                        android:maxLines="4"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"
+                        android:textAlignment="center" />
                 </LinearLayout>
 
 
