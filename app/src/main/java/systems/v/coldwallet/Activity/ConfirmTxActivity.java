@@ -164,8 +164,7 @@ public class ConfirmTxActivity extends AppCompatActivity {
                 contractInitTextual = intent.getStringExtra("CONTRACTINITTEXTUAL");
                 contractInit = intent.getStringExtra("CONTRACTINIT");
                 contractInitExplain = intent.getStringExtra("CONTRACTINITEXPLAIN");
-
-                UIUtil.setCreateContractTx(activity, sender, contract, contractInit, contractInitExplain,contractInitExplain, description, fee, feeScale, timestamp);
+                UIUtil.setCreateContractTx(activity, sender, contract, contractInit, contractInitTextual, contractInitExplain, description, fee, feeScale, timestamp);
 
         }
 
