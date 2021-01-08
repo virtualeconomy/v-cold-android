@@ -288,8 +288,10 @@ public class ColdWalletActivity extends AppCompatActivity {
                     SegQrcode app;
                     app = (SegQrcode) getApplication();
 
-                    int curPage = Integer.valueOf((String) qrContents.substring(4,5)).intValue();
-                    int totalPage = Integer.valueOf((String) qrContents.substring(6,7)).intValue();
+                    int secondSeparator = qrContents.indexOf('/', 4);
+                    int curPage = Integer.valueOf((String) qrContents.substring(4,secondSeparator)).intValue();
+                    int thirdSeparator = qrContents.indexOf('/', secondSeparator + 1);
+                    int totalPage = Integer.valueOf((String) qrContents.substring(secondSeparator + 1,thirdSeparator)).intValue();
                     ArrayList<Account> tmpAccounts = new ArrayList<>(0);
 
                     app.setBody("");
@@ -300,8 +302,8 @@ public class ColdWalletActivity extends AppCompatActivity {
 
                     app.setCurPage(curPage);
                     app.setTotalPage(totalPage);
-                    app.setCheckSum(qrContents.substring(8,16));
-                    app.setBody(qrContents.substring(17));
+                    app.setCheckSum(qrContents.substring(thirdSeparator + 1, thirdSeparator + 9));
+                    app.setBody(qrContents.substring(thirdSeparator + 10));
                     app.setAccounts(accounts);
                     Intent intent = new Intent(activity, ScanSegQrcodeActivity.class);
                     activity.startActivity(intent);

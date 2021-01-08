@@ -123,13 +123,14 @@ public class ScanSegQrcodeActivity extends AppCompatActivity {
                     String tmpCheck = qrcode.getCheckSum();
                     String tmpBody = qrcode.getBody();
 
-                    int cur = Integer.valueOf((String) qrContents.substring(4,5)).intValue();
-                    int total = Integer.valueOf((String) qrContents.substring(6,7)).intValue();
-                    String check = qrContents.substring(8,16);
-                    String body = qrContents.substring(17);
+                    int secondSeparator = qrContents.indexOf('/', 4);
+                    int cur = Integer.valueOf((String) qrContents.substring(4,secondSeparator)).intValue();
+                    int thirdSeparator = qrContents.indexOf('/', secondSeparator + 1);
+                    int total = Integer.valueOf((String) qrContents.substring(secondSeparator + 1,thirdSeparator)).intValue();
+                    String check = qrContents.substring(thirdSeparator + 1, thirdSeparator + 9);
+                    String body = qrContents.substring(thirdSeparator + 10);
 
                     String totalBody = tmpBody + body;
-
                     if (!tmpCheck.equals(check) || tmpCur!= cur -1)
                     {
                         Toast.makeText(activity, "Incorrect QR code, scan again ", Toast.LENGTH_LONG).show();
